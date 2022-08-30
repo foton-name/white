@@ -1,0 +1,517 @@
+.content textarea,
+.content input,
+.content select {
+    width: calc(100% - 22px);
+    height: 44px;
+    padding-left: 18px;
+    position: relative;
+    margin: 0 auto;
+    vertical-align: middle;
+    overflow: hidden;
+    -webkit-transition: background 0.5s ease;
+    -moz-transition: background 0.5s ease;
+    transition: background 0.5s ease;
+    clear: both;
+    border: 1px solid #d0d0d0;
+    margin-top: 12px;
+    background: #31363b;
+    color: #fff;
+}
+
+input.create_section,
+input.create_table {
+    width: 200px;
+    position: relative;
+    left: 50px;
+    margin: inherit;
+    background: #383a4c;
+    color: #fff;
+    margin-top: 10px;
+}
+
+input.table {
+    width: calc(35% - 7px);
+    margin: inherit;
+    display: inline-block;
+    margin-top: 0px;
+}
+
+input.table_n {
+    width: calc(30% - 7px);
+    margin: inherit;
+    display: inline-block;
+    margin-top: 0px;
+}
+
+input.pole,
+input.pole2,
+input.del_tb {
+    width: calc(10% - 25px);
+    margin: inherit;
+    display: inline-block;
+    margin-top: 0px;
+    background: #383a4c;
+    color: #fff;
+}
+
+input.steps {
+    background: linear-gradient(to bottom, #383a4c 0%, #1f2325 100%);
+    width: 250px;
+    color: #fff;
+    right: 0px;
+    position: absolute;
+    bottom: 10px;
+}
+
+input.razdel_add {
+    display: inline-block;
+    width: 220px;
+    float: left;
+    height: 38px;
+}
+
+input.create_table {
+    margin-bottom: 50px;
+    display: inline-block;
+    width: 220px;
+    position: relative;
+    left: 0px;
+}
+
+.sp_table fieldset {
+    width: max-content;
+    display: inline-block;
+    height: 8px;
+    margin-top: 0px;
+    top: 30px;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.content {
+    top: 20px;
+    height: 100%;
+    background: #ffffff;
+    color: #15909d;
+}
+
+input.create_check {
+    width: 25%;
+    display: inline-block;
+    background: #383a4c;
+    color: #fff;
+    height: 48.48px;
+}
+
+input.tb_name {
+    width: 25%;
+    float: left;
+}
+
+.sections_panel {
+    width: 100%;
+    position: relative;
+    margin-top: 50px;
+    left: 0px;
+}
+
+.content {
+    background: #ffffff;
+}
+
+p.red {
+    color: red;
+    text-align: center;
+    font-size: 20px;
+}
+
+.result_site {
+    height: 280px;
+}
+
+.side2 {
+    background: orange;
+    border-radius: 50px;
+    height: 100%;
+    position: relative;
+    width: 0%;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .11), 0 1px 1px rgba(0, 0, 0, .4), 0 0 1px rgba(255, 255, 255, .5);
+    background-image: linear-gradient( -45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+    z-index: 1;
+    background-size: 50px 50px;
+    animation: move 2s linear infinite;
+    transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    text-align: center;
+    color: #fff;
+    line-height: 50px;
+    font-weight: bold;
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 50px 50px;
+    }
+}
+
+.sidebar {
+    position: absolute;
+    width: 80%;
+    height: 50px;
+    background: #eee;
+    margin: auto;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    border-radius: 50px;
+    box-shadow: inset 0 0 1px rgba(0, 0, 0, .11), inset 0 1px 1px rgba(0, 0, 0, .4), inset 0 0 1px rgba(255, 255, 255, .5);
+}
+
+input.steps {
+    background: linear-gradient(to bottom, #383a4c 0%, #1f2325 100%);
+    width: 250px;
+    color: #fff;
+    right: 0px;
+    position: absolute;
+    bottom: 10px;
+}
+
+input.del_pole_2 {
+    background: #383a4c;
+    color: #fff;
+}
+
+.head_sections div {
+    cursor: pointer;
+}
+
+.sp_table p {
+    width: max-content;
+    display: inline-block;
+    height: 44px;
+}
+
+.tablex table {
+    width: 98%;
+}
+
+.sp_table input[type="checkbox"] {
+    width: 20px;
+    margin: inherit;
+    position: relative;
+    top: -12px;
+}
+
+.sp_table fieldset {
+    width: max-content;
+    display: inline-block;
+    height: 8px;
+    margin-top: 0px;
+    top: 30px;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.create_pole {
+    background: #383a4c;
+    width: max-content;
+    color: #fff;
+    width: 200px;
+    text-align: center;
+    height: 44px;
+    line-height: 44px;
+    cursor: pointer;
+    position: relative;
+    margin-top: 12px;
+}
+
+.head_sections div {
+    display: inline-block;
+    height: 70px;
+    line-height: 50px;
+    text-align: center;
+    width: calc(25% - 7px);
+    padding: 0px;
+    border: 1px solid #eee;
+    color: #ffffff;
+    background: #383a4c;
+    text-transform: uppercase;
+}
+
+.sp_table {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 12px;
+    bottom: 20px;
+}
+
+.content_sections {
+    background: #fff;
+    position: relative;
+    margin-top: -20px;
+    width: calc(100% - 7px);
+    padding-top: 20px;
+}
+
+input.create_section,
+input.create_table {
+    width: 200px;
+    position: relative;
+    left: 50px;
+    margin: inherit;
+    background: #383a4c;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.section {
+    display: inline-block;
+    width: calc(33.3% - 125px);
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #eee;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.section_all {
+    padding-bottom: 20px;
+}
+
+.del_r {
+    position: relative;
+    width: max-content;
+    top: 0px;
+    display: inline-block;
+    background: red;
+    height: 36px;
+    line-height: 36px;
+    color: #fff;
+    padding: 7px;
+    cursor: pointer;
+    left: -7px;
+}
+
+.section:hover {
+    background: #383a4c;
+    color: #fff;
+}
+
+.head_sections div.activ_section {
+    background: #fff;
+    color: #025c96;
+    text-transform: uppercase;
+}
+
+input.table {
+    width: calc(35% - 7px);
+    margin: inherit;
+    display: inline-block;
+    margin-top: 0px;
+}
+
+input.table_n {
+    width: calc(30% - 7px);
+    margin: inherit;
+    display: inline-block;
+    margin-top: 0px;
+}
+
+input.pole,
+input.pole2,
+input.del_tb {
+    width: calc(10% - 25px);
+    margin: inherit;
+    display: inline-block;
+    margin-top: 0px;
+    background: #383a4c;
+    color: #fff;
+}
+
+input.create_table {
+    margin-bottom: 50px;
+    display: inline-block;
+    width: 220px;
+    position: relative;
+    left: 0px;
+}
+
+input.razdel_add {
+    display: inline-block;
+    width: 220px;
+    float: left;
+    height: 38px;
+}
+
+.okno_new_section {
+    position: fixed;
+    width: 88%;
+    height: 88%;
+    display: none;
+    top: 7%;
+    left: 7%;
+    z-index: 500;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20) !important;
+    background: #f3fffe;
+}
+
+p.close_new_okno {
+    background: url(close.png);
+    background-size: 100% 100%;
+    width: 25px;
+    height: 30px;
+    position: absolute;
+    right: -10px;
+    top: -30px;
+    cursor: pointer;
+}
+
+input.new_name {
+    width: 25%;
+    margin: initial;
+    display: inline-block;
+}
+
+.head_section_new {
+    width: 98%;
+    position: relative;
+    margin: 0 auto;
+    padding-top: 2%;
+}
+
+input.new_translit {
+    width: 25%;
+    margin: initial;
+    display: inline-block;
+}
+
+input.new_section_pole0 {
+    width: 25%;
+    margin: initial;
+    display: inline-block;
+    background: #383a4c;
+    color: #fff;
+    height: 50px;
+}
+
+input.new_section_pole {
+    width: 20%;
+    margin: initial;
+    display: inline-block;
+    background: #383a4c;
+    color: #fff;
+}
+
+.pole_sp_section0 {
+    padding: 2%;
+}
+
+input.new_name_pole,
+input.arg_pole_new,
+input.new_name_pole_rus {
+    width: 15%;
+    margin: initial;
+    display: inline-block;
+    height: 40px;
+}
+
+select.format_pole_new {
+    width: 15%;
+    margin: initial;
+    display: inline-block;
+}
+
+select.html_pole_new {
+    width: 15%;
+    margin: initial;
+    display: inline-block;
+}
+
+input.del_new_pole,
+input.del_new_pole2 {
+    width: 10%;
+    margin: initial;
+    display: inline-block;
+    background: #383a4c;
+    color: #fff;
+}
+
+.pole_sp_section {
+    padding: 0px;
+}
+
+.contener_new_pole {
+    margin-top: 20px;
+    padding: 0px;
+}
+
+.content_new_section {
+    width: 98%;
+    position: relative;
+    margin: 0 auto;
+    overflow: auto;
+    height: 90%;
+    top: 5%;
+}
+
+input[type="checkbox"].checks {
+    width: 20px;
+    margin: inherit;
+    position: relative;
+    top: -12px;
+}
+
+.hrs {
+    padding: 12px;
+    margin-bottom: -25px;
+    border: 1px solid #02548938;
+    margin-top: 5px;
+    width: calc(80% - 0px);
+}
+
+.filests {
+    width: calc(30% - 20px);
+    display: inline-block;
+    height: 8px;
+    margin-top: 0px;
+    top: 30px;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.pole_sp_section0>.contener_new_pole0 {
+    padding-bottom: 25px;
+    border-bottom: 2px solid #000;
+    background: #fefefe;
+    margin-top: 25px;
+}
+
+input.create_razdel {
+    width: 25%;
+    margin: initial;
+    background: #383a4c;
+    color: #fff;
+    height: 50px;
+    position: relative;
+    margin: 0 auto;
+}
+
+input.tb_name {
+    width: 25%;
+    float: left;
+}
+
+input.create_check {
+    width: 25%;
+    display: inline-block;
+    background: #383a4c;
+    color: #fff;
+    height: 48.48px;
+}

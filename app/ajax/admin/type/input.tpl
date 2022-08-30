@@ -1,0 +1,1 @@
+<span class='default_span'>[[lang]]</span><input type='text' name='[[name]]' value='[[value]]' placeholder='[[name]]' >

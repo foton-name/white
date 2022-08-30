@@ -1,0 +1,9 @@
+input[type="color"].taxonomy{width:28px;padding:0px;position:relative;margin-left:0px;display:inline-block;height:28px;border-radius:50px;border:1px solid red}
+.taxonomy_sp fieldset{width:max-content;display:inline-block}
+input[type="checkbox"],input[type="radio"] {
+    width: 12px;
+    left: 0px;
+    display: inline-block;
+    margin-left: 12px;
+    height: 12px;
+}

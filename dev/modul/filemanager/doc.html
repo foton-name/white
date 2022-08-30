@@ -1,0 +1,989 @@
+
+<div class="popap-doc">
+    <div class="close-doc"><img src="/dev/modul/filemanager/css/close.svg"></div>
+<div class="doc-tabs git">git($GLOBALS["foton_setting"]["path"]."/dir/myfile.txt”);
+Ищет файл в системе gitf, если есть сессия gitf и находит файл возвращает путь из директории .gitf/, если нет возвращает текущий путь
+Сигнатура: $path – строка, путь до файла $GLOBALS["foton_setting"]["path"]."/dir/myfile.txt” или ”dir/myfile.txt”
+Результат: Путь до файла
+</div>
+
+<div class="doc-tabs fexists_foton">fexists_foton('view/site','head.php');
+Проверяет существование файла, проверяет сначала в директории текущей админ. Панели, если нет то в директории текущего сайта, если и там файла нет проверяет напрямую в директории от корня сайта, можно использовать для проверки любого файла
+Сигнатура: $file – название файла контроллера или модели полное (model_file.php или controller_file.php)
+$mc – директория 'model' или 'controller'
+Результат: Если файл существует возвращает путь до него, если нет возвращает  false
+</div>
+
+<div class="doc-tabs tpl_html">tpl_html(“myfile”,1);
+Подключает класс модели. Используется в основном для подключения методов моделей сайта в типах данных, отсюда и название.
+Сигнатура: $tpl – краткое название модели, то есть если класс модели 'Model_MyCustom', то писать нужно только 'mycustom'
+$dir 1 — текущая админ. 
+нет — текущий сайт
+- указано другое, ищет в указанной директории
+Результат: 
+Если находит, то подключает и возвращает объект класса, если нет, возвращает log_f с описанием ошибки.
+</div>
+
+<div class="doc-tabs arr_methods">arr_methods($tpl,$dir,$type) - arr_methods('workarea',1,2)
+Возвращает массив списка методов класса
+Сигнатура: $tpl – название mvc шаблона ('controller_workarea.php'=&gt;'workarea')
+$dir – 1 ищет в директории админки, null – ищет в директории сайта, другая строка — ищет в указанной директории
+$type – 1 выводит методы модели, 2 — выводит методы контроллера, тип не указан выводит список методов уже подключенного класса.
+Результат: Путь до файла
+</div>
+
+<div class="doc-tabs include_tpl">include_tpl($path) — include_tpl('menu/form_end');
+Путь к файлу интерфейса из директории /ajax/admin/php/
+Сигнатура:  Название интерфейса/название файла
+Результат: выводит путь к файлу, при ошибке возвращает log_f с описанием ошибки
+
+</div><div class="doc-tabs globfunc">
+globfunc ($mvc=null,$dir='cs') - globfunc ('workarea','ca')
+Возвращает объект контроллера или модели
+Сигнатура: $mvc – название mvc шаблона ('controller_workarea.php'=&gt;'workarea')
+$dir – cs контроллер/директория сайта, ms - модель/директория сайта, 'ma' -  модель/директория админки, 'ca' — контроллер /директория админки
+Результат: объект класса, в случае ошибки возвращает log_f
+
+</div><div class="doc-tabs dir_search_foton">
+dir_search_foton ($path=null,$search=null,&$files=null) - dir_search_foton ($GLOBALS['foton_setting']['path'].'/modules','word') 
+Возвращает массив ссылок на файлы, где было найдено совпадение по слову
+Сигнатура: $path – путь к директории в которой нужно искать,
+$search – фраза, которую нужно найти
+$files – ссылка на массив в рекурсии, при запуске не передается.
+Результат: массив путей к файлам, в которых было найдено совпадение.
+
+</div><div class="doc-tabs translite_m">
+translite_m ($text=null) - translite_m ('русский текст')
+Выполняет транслитерацию строки
+Сигнатура: $text — текст для транслитерации
+Результат: Результат транслитерации — строка из латинских символов и знаков пунктуации.
+
+</div><div class="doc-tabs translit_base">
+translit_base ($text=null) - translit_base ('русский текст')
+Выполняет транслитерацию строки
+Сигнатура: $text — текст для транслитерации
+Результат: Результат транслитерации — строка из латинских символов и знаков пунктуации.
+
+</div>
+
+<div class="doc-tabs del_file">del_file($table=null,$id=null) - del_file('table',5)
+Удаляет файл по id в таблице. Путь к файлу может быть в любом столбце, должен начинаться от корня текущего сайта без слеша, то есть если файл лежит в /view/site/img/file.txt – путь должен быть img/file.txt, несколько путей должны быть разделены %%%
+Сигнатура: $table – таблица в базе данных
+$id – id записи
+Результат: Количество удаленных файлов, если не переданы таблица и id выводит log_f
+</div>
+
+<div class="doc-tabs dir_delete_foton">dir_delete_foton($dir) - 
+Удаляет директорию
+Сигнатура: $dir – полный путь до директории 
+Результат: При ошибке возвращает false
+
+</div>
+
+<div class="doc-tabs post_arr">post_arr()
+Возвращает массив post данных в массиве $post
+
+Результат: массив post данных
+</div>
+<div class="doc-tabs c_f">
+    c_f($count=null,$param=array()) - метод ORM 
+    Выводит количество затроных строк в запросе
+    $count - если указана переменная не null будет выполнен метод fetchColumn(), если не указана или null rowCount()
+    $param - если $param = ['S'=>true] - экранирование " не будет выполнено, 
+    используется в основном для поиска в сериализованных или json данных
+</div>
+<div class="doc-tabs get">get()
+Создает объекты из элементов суперглобального массива:
+get()->g - $_GET
+get()->p - $_POST
+get()->s - $_SESSION
+get()->r - $_REQUEST
+get()->sr - $_SERVER
+
+</div>
+<div class="doc-tabs post_get">post_get()
+Превращает url вида a/b/c/d в массив $_GET[0]=a,$_GET[1]=b,$_GET[2]=c и т. д.
+
+Результат: $_GET
+</div>
+
+<div class="doc-tabs include_files_f">include_files_f($file=null)
+Выводит содержимое файла
+Сигнатура: $file – путь от корня сайта со слешем в начале
+Результат: содержимое файла
+</div>
+
+<div class="doc-tabs dbins">dbins(string: $table,array: $arr,string: $model) - запись в таблицу $table
+$model – название модели, необязательное значение, если указана модель в методе перед обработкой вызываются хуки модели : $table.”_validate” и $table.”_is”
+$arr = ['name'=&gt;'value']
+</div>
+
+<div class="doc-tabs dbup">dbup(string: $table,array: $arr,array: $where,string: $model) – обновление данных в таблице
+$model – название модели, необязательное значение, если указана модель в методе перед обработкой вызываются хуки модели : $table.”_validate” и $table.”_is”
+$arr = ['name'=&gt;'value']
+$where = ['GL','=id'=&gt;5,'AND','&gt;count'=&gt;7,'GR','OR','GL','%text'=&gt;'test','AND','field'=&gt;'test','GR'] В SQL запросе получим
+WHERE (id=5 AND count&gt;7) OR (text LIKE '%test%' AND field='test')
+</div>
+
+<div class="doc-tabs isvalid">isvalid(array: $arr1,array: $arr2,string: $status) – проверяет данные на валидность
+$arr1 = массив методов проверки, ключи поля значений
+например: ['mail'=&gt;'M','text'=&gt;'O']
+M – mail
+D – домен
+F – число float
+IP – IP адрес
+R – регулярное выражение
+U – URL адрес
+I – число integer
+O – непустое значение
+T – строка
+$arr2 = ['mail'=&gt;'mail@mail.ru','text'=&gt;'my text']
+$status – любая не пустая строка, если задана, то результатом будет значение true или false, если не указан результатом будет массив ключами которого будут поля, значениями true – поле введено верно, false – поле введено не верно.
+</div>
+
+<div class="doc-tabs validate">validate(string | array: $arr1,array: $arr2) – изменяет данные в соответствии с методами обработки
+если $arr1 строка, то она должна содержать один из методов обработки, либо массив ключами которого будут ключи массива $arr2, значениями методы обработки. 
+Список методов обработки:
+html — эквивалент htmlspecialchars
+pass — создает md5 хеш
+text — оставляет только печатные символы
+medium — оставляет только русские и латинские символы и пробел
+abcd — оставляет только русские и латинские символы, цифры и пробел
+abc -  оставляет только латинские символы
+abv -  оставляет только русские символы
+same — оставляет данные без изменения
+int – оставляет только цифры
+phone — оставляет цифры ± и скобки
+tags — удаляет все теги
+plus — аналог метода abs
+mini – аналог метода floor
+maxi - аналог метода ceil
+nul – всегда выдает null
+tabs – удаляет все пробельные символы
+$arr2 – массив полей со значениями
+$arr2 = ['mail'=&gt;'mail@mail.ru','text'=&gt;'my text']
+
+
+</div>
+
+<div class="doc-tabs api">api(string: $key,string: $model,string: $table,array: $arr,integer: $id) – метод служит для изменения данных таблицы методами GET и POST
+$key == GET['key']
+$model == название модели
+$table == название таблицы из модели
+$arr – массив данных для обновления, добавления или вывода
+['поле таблицы'=&gt;'значение'], необязательный параметр, если массив $_POST == $arr.
+Обязательные get параметры для запроса по api:
+key – ключ приложения
+status – может принимать несколько значений:
+1. up – обновление данных 
+	обязательные параметры:
+	$arr['id'] – id записи
+2. I – insert запись данных
+3. del – удаление записи:
+	обязательные параметры:
+	id – id записи
+4. echo – вывод записи по id
+	обязательные параметры:
+	id – id записи
+5. list – вывод нескольких записей
+	не обязательные параметры
+	page – страница,count – количество записей (используются только 	вместе)
+	where – json строка массива $arr для выборки записей.
+format - “api_json”
+</div>
+
+<div class="doc-tabs water_mark">water_mark($image=null,$mark=null,$w=20,$h=20,$zoom=7) – выводит обработанную фотографию с водяным знаком.
+$image – путь до картинки
+$mark – путь до водяного знака
+$w – ширина знака
+$h – высота знака
+$zoom – увеличение знака
+Для элементов без фото можно установить глобальный параметр фото по умолчанию $GLOBALS['foton_setting']['image_def']
+$GLOBALS['foton_setting']['water_mark'] — путь до водяного знака по умолчанию
+</div>
+
+<div class="doc-tabs search">search($text, $arr) – поиск похожего слова на слово $text из массива $arr
+</div>
+
+<div class="doc-tabs searchf">searchf($name, $list) – более точный поиск похожего слова на слово $name из массива $list
+&lt;div class="doc-tabs h_site"&gt;
+h_site() - адрес сайта с http{s}
+</div>
+<div class="doc-tabs p_site">
+p_site() - адрес страницы с http{s}
+</div>
+<div class="doc-tabs redirect_get">
+redirect_get($select=array(),$stop=10,$increment=1,$no_increment=array()) -
+выполняет редирект на текущую страницу с get параметрами для обхода цикла.
+$select – массив, содержащий имена get параметров, к которым будет применена операция инкремента
+$stop – ['id'=&gt;5,'count'=&gt;7] – при достижении любым гет параметром ближайшего значения цикл будет остановлен, также может быть числом, и тогда если любое из начения get параметров дойдет до него цикл будет остановлен.
+$increment – число, на которое нужно увеличить каждый элемент, либо массив, содержащий  имена get параметров в ключе и значения инкремента для них в значении. Также массив может содержать в значениях  «eval:» - тогда будут работать шаблоны для get параметров, к примеру ['count'=&gt;'eval:|id|*2'] – в каждом следующем запросе значение get параметра count будет в 2 раза больше get параметра id.
+$no_increment – массив, содержащий имена get параметров, к которым не будет применена операция инкремента.
+
+
+
+Пример:
+Разместите в контроллере главной страницы следующий код:
+
+&lt;?
+class Controller_html extends Model_html
+{
+    public function test(){
+    	if(isset($_GET['id']) && isset($_GET['count'])){
+    		$select = ['id','count','name'];
+    		$no_increment = ['name'];
+    		$stop = ['id'=&gt;5,'count'=&gt;20];
+    		$increment = ['id'=&gt;1,'count'=&gt;'eval:|id|*2'];
+    		$this-&gt;core-&gt;redirect_get($select,$stop,$increment,$no_increment);
+    	}
+    }
+}
+
+Теперь перейдите по ссылке: 
+http://вашдомен/html/?id=1&amp;count=1&amp;name=test
+</div>
+
+<div class="doc-tabs nearest">nearest($arr, $arr_search, $count = 2) – выполняет поиск подходящего массива векторов $arr в массиве массивов векторов $arr_search, $count – длина массива для поиска, выводит позицию найденного элемента.
+$arr1 = array(
+        array(2,-2),
+        array(-2,2),
+        array(-7,8)
+ ); - где ищем
+$arr2 = array(-7,8); - что ищем
+$count = 2  длина массива для поиска
+nearest($arr1,$arr2,$count);
+$arr1 = array(
+        array(2,-2,7),
+        array(2,-2,8),
+        array(-7,8,8)
+);
+$arr2 = array(2,-2,7);
+$arr = $this-&gt;core-&gt;nearest($arr1,$arr2,$count);
+при $count=2 выдаст 1, при $count=3 выдаст 0, так как будет искать в 3-х мерном пространстве векторов.
+</div>
+
+<div class="doc-tabs smtpSend">smtpSend($mailTo, $subject, $message) – отправляет письмо через SMTP, требует указания параметра $GLOBALS['foton_setting']['smtp'], в противном случае выдает лог ошибок.
+$mailTo — E-mail получателя
+$subject — заголовок письма
+$message — тело письма
+
+is_valid($val, $flag) — проверяет $val по флагу $flag на соответствие, $flag может принимать значение:
+M – mail
+D – домен
+F – число float
+IP – IP адрес
+R – регулярное выражение
+U – URL адрес
+I – число integer
+O – непустое значение
+T – строка
+</div>
+
+<div class="doc-tabs import_csv">import_csv($model,$table,$name,$path) – обновляет, либо добавляет данные в таблицу $table из csv файла.
+$model – название модели таблицы, например html
+$table – название таблицы
+$name – имя [name] элемента загрузки файла в &lt;input type=”file” name=”name”&gt;
+$path – используется в методе i_upload, имя директории в которую будет загружен файл, если директории нет, она будет создана.
+После загрузки файл автоматически удаляется.
+Для добавления лучше использовать экспортированный с помощью export_csv файл. Данные обновляются по id записей в таблице, если id указан 0, то запись будет добавлена как новая. При импорте используется метод i_update. 
+В случае ошибки выводит лог системы.
+</div>
+
+<div class="doc-tabs export_csv">export_csv($table,$where,$path) – метод экспортирует данные из таблицы в csv файл.
+$table – таблица, из которой выгружаем записи.
+$where – необязательный параметр, по умолчанию null, должен содержать массив ключ — маска и поле, значение — значение выборки, например ['!name'=&gt;'test'], для выборки данных используется метод getlist, если указаны поля с префиксом поиска интерфейса find_, то они заменятся на %.
+</div>
+
+<div class="doc-tabs create_f">create_f($tb=null) – создание таблицы</div>
+<div class="doc-tabs insert_f">insert_f($tb=null) – запись в таблицу</div>
+<div class="doc-tabs tb_f">tb_f($tb=null,$f=null) – вывод из таблицы, $f (fields) – поля для вывода, если не указан выводятся все поля</div>
+<div class="doc-tabs d_f">d_f($tb=null) — удаление записи</div>
+<div class="doc-tabs trun_f">trun_f($tb=null) — очистка таблицы</div>
+<div class="doc-tabs up_f">up_f($tb=null,$p=null) — обновление таблицы, $p строка запроса типа «поле='значение',поле='значение'»</div>
+<div class="doc-tabs drop_f">drop_f($tb=null) – удаление таблицы</div>
+<div class="doc-tabs int_f">int_f($p=null) – создает поле integer длина 70</div>
+<div class="doc-tabs medium_f">medium_f($p=null) — создает поле mediumtext</div>
+<div class="doc-tabs date_f">date_f($p=null) — создает поле даты</div>
+<div class="doc-tabs bit_f">bit_f($p=null) — создает битовое поле</div>
+<div class="doc-tabs poly_f">poly_f($p=null) — создает поле polygon</div>
+<div class="doc-tabs real_f">real_f($p=null) – создает поле вещественного числа</div>
+<div class="doc-tabs time_f">time_f($p=null) — создает поле времени</div>
+<div class="doc-tabs inc_f">inc_f($p=null) — создает автоинкремент</div>
+<div class="doc-tabs key_f">key_f($p=null) — создает первичный ключ</div>
+<div class="doc-tabs where_f">where_f($w=null,$and=null,$group=null) выборка значений (условие если)
+$w – строка типа «поле=значение» или массив array(“поле“=&gt;”значение“)
+ключ может содержать маску:
+array(“!id“=&gt;5) – id!=5
+array(“&gt;p“=&gt;5,”&lt;s”=&gt;7) – p&gt;5 и s &lt;7
+array(“%text“=&gt;'слово') – text содержит 'слово'
+array(“^text“=&gt;'слово') – text начинается с  'слово'
+array(“$text“=&gt;'слово') – text заканчивается 'слово'
+array(“!text“=&gt;'слово') – text не содержит 'слово'
+$and – и,или, по умолчанию «и»
+$group – 1 вместо where выражение закрывается в скобки (поле1=2 and поле2='text'), используется только вместе с where(),orf(),andf()
+2 -  вместо where выражение остается без изменений, используется только вместе с where(),orf(),andf()
+</div>
+<div class="doc-tabs where">where() - добавляет в запрос WHERE</div>
+<div class="doc-tabs andf">andf() - добавляет в запрос AND</div>
+<div class="doc-tabs orf">orf() - добавляет в запрос OR</div>
+<div class="doc-tabs join_f">join_f($arr) – оператор JOIN (выполняет сравнение на соответствие условию между таблицами)
+$arr – array('table1', //1 таблица
+array('field1','field2'), // поля 1 таблицы поддерживает маски как в where_f - (!,&lt;,&gt;)
+'table2', //2 таблица
+array('field1','field2'), //поля 2 таблицы
+'L'); //необязательное
+I – inner join (по умолчанию)
+L – left join
+R – right join
+O – outher join
+C – cross join
+F – full join
+пример: array('role',array('id'),'user_inc',array('id'),'L');
+return $this-&gt;core-&gt;tb_f('role')-&gt;join_f($arr)-&gt;eq_f();
+&lt;div class="doc-tabs like_f"&gt;like_f($wp=null,$w=null) — более быстрый поиск like, 
+$wp – массив значений полей, либо строка с значением,
+$w – массив полей, либо строка с полем</div>
+<div class="doc-tabs where_arr_f">where_arr_f($wp=null,$w=null) - более быстрый поиск =, 
+$wp – массив значений полей, либо строка с значением,
+$w – массив полей, либо строка с полем</div>
+<div class="doc-tabs insert_arr">insert_arr($arr=null) – массив значений для записи array('поле'=&gt;'значение')
+</div>
+<div class="doc-tabs limit_f">limit_f($f=null,$limit=null,$prev=null) - сортировка DESC
+$f – строка поле сортировки,
+$limit – количество записей
+$prev – номер записи с которой начать
+</div>
+
+<div class="doc-tabs limita_f">limita_f($f=null,$limit=null,$prev=null) - сортировка ASC
+$f – строка поле сортировки,
+$limit – количество записей
+$prev – номер записи с которой начать
+</div>
+
+<div class="doc-tabs lim_f">lim_f($limit=null,$prev=null) сортировка DESC
+$limit – количество записей
+$prev – номер записи с которой начать
+</div>
+
+<div class="doc-tabs sorts_f">sorts_f($sp=null,$s=null)
+$sp – поле сортировки
+$s – сортировка asc или desc
+</div>
+
+<div class="doc-tabs one_f">one_f($p=null)
+$p – поле сортировки, выводит одно значение, сортировка DESC
+group_f($f=null)
+группирует, $f – поле по которому произойдет группировка
+</div>
+<div class="doc-tabs query_f">query_f() - выполняет запрос к базе данных,сигнатура - sql запрос
+</div>
+
+<div class="doc-tabs q_f">q_f() - выполняет запрос prepare – результат объект orm
+</div>
+
+<div class="doc-tabs forq_f">forq_f($field_key,$field_value) - выполняет запрос результат массив значений, ключи поля таблицы, и номера, то есть структура  вида array(0=&gt;array(0=&gt;1,id=&gt;1,1=&gt;text,name=&gt;text)); 
+Аргументы метода являются необязательными,
+$field_key — строка(поле таблицы)
+$field_value — строка или массив(поле или поля таблицы)
+если они указаны, то выводится массив с ключами значениями поля $field_key и значениями равными значениям поля $field_value, если $field_value является массивом, то значением поля $field_key будет массив значений.
+</div>
+
+<div class="doc-tabs eq_f">eq_f() - выводит строку запроса (для тестирования)
+</div>
+
+<div class="doc-tabs cq_f">cq_f($echo=null) — выполняет создание таблицы с полями в формате InnoDB, кодировка utf8
+</div>
+
+
+<div class="doc-tabs i_insert">i_insert - ($c_name=null,$table=null,$arr=null,$prev=null,$after=null,$ins_id=null)
+$c_name — название модели
+$table — название таблицы
+$arr – массив данных array(поле=&gt;значение,поле=&gt;значение)
+$prev — метод модели обработки данных до выполнения
+$after - метод модели обработки данных после выполнения
+$ins_id – если не ноль возвращается id созданной записи, иначе выдает результат массив обработанных данных 
+Записывает данные в таблицу, выдает результат массив обработанных данных или id записи, в случае неудачи выдает log_f
+
+
+</div><div class="doc-tabs i_delete">i_delete - ($c_name=null,$table=null,$id=null,$prev=null,$after=null)
+$c_name — название модели
+$table — название таблицы
+$id – id записи в таблице
+$prev — метод модели обработки данных до выполнения
+$after - метод модели обработки данных после выполнения
+выполняет удаление записи с id=$id, выдает результат $id, в случае неудачи выдает log_f
+
+
+</div><div class="doc-tabs i_update">i_update - ($c_name=null,$table=null,$arr=null,$prev=null,$after=null)
+$c_name — название модели
+$table — название таблицы
+$arr – массив данных array(поле=&gt;значение,поле=&gt;значение)
+$prev — метод модели обработки данных до выполнения
+$after - метод модели обработки данных после выполнения
+Обновляет данные в таблице, выдает результат массив обработанных данных, в случае неудачи выдает log_f
+
+
+</div><div class="doc-tabs i_create">i_create - ($c_name=null,$table=null,$dbs=null)
+$c_name — название модели
+$table — название таблицы
+$dbs – формат таблицы (InnoDB,MySAM и т. д.)
+Создает таблицу используя хук метод модели 'interfaces', если он не найден выполняет поиск 'interface_sp', в случае неудачи выдает log_f
+
+
+</div><div class="doc-tabs i_alter">i_alter - ($c_name=null,$table=null)
+$c_name — название модели
+$table — название таблицы
+Удаляет и обновляет поля таблицы используя хук модели 'drop_interface', в случае неудачи выдает log_f
+
+
+</div><div class="doc-tabs i_drop">i_drop - ($c_name=null,$table=null)
+$c_name — название модели
+$table — название таблицы
+Удаляет таблицу используя хук модели 'drop_interface', в случае неудачи выдает log_f
+
+
+</div><div class="doc-tabs i_list_ajax">i_list_ajax - ($arr=null,$replace=null,$delete=null)
+$arr=array('model'=&gt;'html','table'=&gt;'graph','interface'=&gt;'sp','extra_arr'=&gt;array('name'=&gt;'lang'),'fields_table'=&gt;'field','fields_type'=&gt;'format_select');
+$replace=array('wheres'=&gt;'textarea');
+$delete=array('tables');
+
+
+</div><div class="doc-tabs i_arr">i_arr - ($arr=null)
+$arr=array('model'=&gt;'model' //— модель
+,'table'=&gt;'table' // таблица
+,'interface'=&gt;'interface' //интерфейс
+,'extra_arr'=&gt;array() //дополнительные поля для вывода, поле в массиве таблицы хука модели-&gt;поле в типе данных
+,'fields_table'=&gt;'fields' //элемент таблицы хука модели содержащий поля таблицы
+,'fields_type'=&gt;'type'  //элемент таблицы хука модели содержащий типы данных
+);
+
+
+</div><div class="doc-tabs i_f">i_f - ($c_name=null)
+$c_name — название модели
+Результат — объект модели, в случае ошибки false
+
+
+</div><div class="doc-tabs i_h1">i_h1 - ($c_name=null,$table=null)
+$c_name — название модели
+$table — название таблицы
+Выдает название модели используя 'names'
+
+
+</div><div class="doc-tabs i_unlink">i_unlink - ($del=null,$arr=null)
+Удаляет файлы, пути от корня директории представлений сайта без слеша, то есть вместо /view/site/img/img.jpg пишем img/img.jpg, 
+$del – если не null то функция выполняется, иначе выводит log_f
+Выполнение функции:  из массива $arr удаляются файлы, значениями массива могут быть строки типа  img/img.jpg%%% img/img1.jpg%%% img/img2.jpg, тогда будут удалены все файлы в такой строке.
+$arr array('img/img.jpg','img/img.jpg','img/img.jpg%%% img/img1.jpg%%% img/img2.jpg');
+Если $arr ==null пути к файлам ищутся в массиве $_POST, выбираются все значения post массива и проверяются на существование файлов, если файлы существуют, они удаляются.
+
+
+</div><div class="doc-tabs i_upload">i_upload - ($up=null,$arr=null,$path_dir=null,$size=null,$format=null)
+Загрузка файлов
+$up - если не null то функция выполняется, иначе выводит log_f
+$arr  - массив для удаления файлов, как в предыдущем методе - array('img/img.jpg','img/img.jpg','img/img.jpg%%% img/img1.jpg%%% img/img2.jpg');
+$path_dir – директория хранения файлов $GLOBALS['foton_setting']['path'].'/view/'.$GLOBALS['foton_setting']['sitedir'].'/'.$path_dir если не указан и существует директория img будет установлена директория img
+$size – максимальный размер загружаемого файла, если не указан будет установлен размер $GLOBALS['foton_setting']['size_file'] в Мб
+$format – массив разрешенных к загрузке форматов файлов, если не указан будет установлен $GLOBALS['foton_setting']['format']
+В случае ошибки загрузки на каком-либо этапе выводится log_f
+
+
+</div><div class="doc-tabs i_handler_ajax">i_handler_ajax - ($data=null,$arr=null)
+Обработчик данных для выполнения аякс запроса по выводу типов данных
+$arr = array(</div>
+	<div class="doc-tabs 'where'=&gt;array">'where'=&gt;array( //условие для запроса</div>
+		<div class="doc-tabs 'field'=&gt;array">'field'=&gt;array( //массив полей и значений
+			%!=name'=&gt;'value' //поля работают с маской как в orm Foton
+		),
+		'and'=&gt;'and|or'), //и или
+		'count'=&gt;int, //количество выводимых элементов
+		'page'=&gt;int, //номер страницы</div>
+		<div class="doc-tabs 'sort'=&gt;array">'sort'=&gt;array( //сортировка поле-&gt;тип
+			'fields'=&gt;'asc'
+		));
+$data — либо массив такой же структуры, либо строка такой же структуры, только для разделения используются символы '|||' - массив 1 уровня, ':::' - массив 2 уровня
+
+</div><div class="doc-tabs i_load_ajax">i_load_ajax - ($html=null,$data=null,$arr_new=null)
+$html – содержимое логического представления. Например тега &lt;polygon&gt;, $data,$arr_new — массивы передаются в том же виде методу i_handler_ajax($data,$arr_new) для обработки sql запроса.
+</div>
+
+<div class="doc-tabs i_for_ajax">i_for_ajax($arr_type,$arr_field)
+$arr_type – массив типов
+$arr_field – массив полей
+Выводит массив для вывода готовых типов [field|type]
+
+
+</div><div class="doc-tabs i_front_css">i_front_css - ($i=null) $i -название интерфейса, выводит css интерфейса, если он существует по пути /ajax/'.$GLOBALS['foton_setting']['admindir'].'/css/названиеинтерфейса.css
+
+
+</div><div class="doc-tabs i_front_js">i_front_js - ($i=null) $i -название интерфейса, выводит js интерфейса, если он существует по пути /ajax/'.$GLOBALS['foton_setting']['admindir'].'/js/названиеинтерфейса.js
+
+
+</div><div class="doc-tabs i_list">i_list - ($face=null,$sql=null,$add_arr=null)
+Основной метод интерфейсов для вывода данных
+$add = array('replace'=&gt;array('name'=&gt;'test') — замена поля переменной (необязательный параметр)
+,'delete'=&gt;array('title') — удаление полей переменной из вывода (необязательный параметр)
+,'add'=&gt;array('field'=&gt;array('name2'=&gt;'test2') — добавление новых полей со значениями (необязательный параметр)
+,'tpl'=&gt;array('name2'=&gt;'textarea') — тип данных для поля
+,'extra'=&gt;array('lang'=&gt;'new_text') — дополнительный параметр интерфейса сопоставление ключа массива таблицы со значением поля [[fields]] у типа данных из таблицы html (необязательный параметр)
+));
+    $sql = array('where'=&gt;array('field'=&gt;array('%name'=&gt;'Фото') — фильтр вывода
+,'and'=&gt;'and') — разделитель where sql запроса 
+,'count'=&gt;5 — количество записей
+,'page'=&gt;0 — страница
+,'sort'=&gt;array('id'=&gt;'ASC')); - сортировка</div>
+ <div class="doc-tabs $face=array">$face=array('model'=&gt;'html' – модель
+,'table'=&gt;'menu' — таблица
+,'interface'=&gt;'sp' — интерфейс, можно не указывать, в данном случае берется хук модели interface_sp (select property)
+,'extra_arr'=&gt;array('name'=&gt;'lang') – дополнительные поля ключ — поле в массиве таблицы хука модели, значение название поля для замены в типе данных [[fields]]
+,'fields_table'=&gt;'field' – ключ таблицы хука модели содержащий массив полей таблицы
+,'fields_type'=&gt;'format_select' – ключ таблицы хука модели содержащий массив форматов вывода
+,'create'=&gt;true — создание или вывод, если true то создание и выводится только одна запись без вывода значений полей из таблицы базы данных</div> 
+<div class="doc-tabs ,'create_value'=&gt;array">,'create_value'=&gt;array('field'=&gt;'value') – используется если 'create'=&gt;true, пишет значения value полям field при выводе
+,'count'=&gt;'pagination' — поле в хуке модели содержащее количество элементов на странице
+);
+
+
+</div><div class="doc-tabs i_arr_all">i_arr_all - ($model=null,$table=null,$interface=null)
+$model – имя модели, $table – название таблицы, если не указано, выдаст массив из всех таблиц
+$interface — если не указан выводится interface_sp – select property
+если указан 1 выводится стандартный interfaces
+Если указано иное выводится указанный интерфейс.
+Если модель или метод не найдены выводит ошибку типа log_f
+
+
+</div><div class="doc-tabs i_echo_type">i_echo_type -($type=null,$arr=null)
+Основной метод вывода типов данных
+$type – указывается код типа из таблицы html
+$arr = array('fields'=&gt;array('name'=&gt;поле таблицы,'value'=&gt;значение),'model'=&gt;модель (необязательный параметр),'table'=&gt;таблица (необязательный параметр));
+</div>
+<div class="doc-tabs abc09">abc09($text) – удаляет из переменной все символы кроме латинских букв, цифр и нижнего подчеркивания, выводит обработанный текст
+</div>
+
+<div class="doc-tabs number_foton">number_foton($text) – удаляет из переменной все символы кроме цифр, выводит обработанный текст
+</div>
+
+<div class="doc-tabs text_foton">text_foton($text) – удаляет из переменной все символы кроме букв и пробела, выводит обработанный текст
+</div>
+
+<div class="doc-tabs input_foton">input_foton($text) – удаляет из переменной php и html теги, а также --, выводит обработанный текст
+</div>
+
+<div class="doc-tabs html_foton">html_foton($text) – дважды декодирует html символы, выводит обработанный текст, используется для вывода типов данных
+
+text_resizes_foton ($text=null,$n=null) — обрезает строку 
+$text – строка, которую нужно обрезать,
+$n – количество символов, до которого нужно обрезать строку.
+</div>
+
+<div class="doc-tabs unsetPost">unsetPost($delete=null,$js=null) — выполняет редирект, если есть post данные
+$delete — 1,
+$js — не null редирект происходит на js, если null на php
+field_table($table=null) – выводит массив полей таблицы $table
+</div>
+<div class="doc-tabs var_start">var_start($var=null) – начало интерфейса, передаем строку или массив в метод для выполнения операций.</div>
+<div class="doc-tabs var_inarr">var_inarr($arr=null) — выполняет поиск в переданном массиве строки из интерфейса (возвращает true/false).</div>
+<div class="doc-tabs var_inarr_to">var_inarr_to($str=null) — выполняет поиск переданной строки в массиве интерфейса (возвращает true/false).</div>
+<div class="doc-tabs var_im">var_im($d='') - превращает массив интерфейса в строку по переданному разделителю $d.</div>
+<div class="doc-tabs var_ex">var_ex($d=null) - превращает строку интерфейса в массив по переданному разделителю $d.</div>
+<div class="doc-tabs var_method">var_method($method=null) — выполняет переданный метод со строкой или массивом интерфейса.</div>
+<div class="doc-tabs var_replace">var_replace($pattern,$replace) — заменяет $pattern на $replace используя str_replace.</div>
+<div class="doc-tabs var_preplace">var_preplace($pattern,$replace) — заменяет $pattern на $replace используя preg_replace.</div>
+<div class="doc-tabs var_search">var_search($search) – ищет в строке интерфейса переданную строку и записывает в строку интерфейса результат strripos.</div>
+<div class="doc-tabs var_search_to">var_search_to($search)– ищет в переданной строке строку интерфейса и записывает в строку интерфейса результат strripos.</div>
+<div class="doc-tabs var_input">var_input($path) — записывает строку интерфейса в файл по пути $path, если в интерфейсе массив, записывает его json обьект.</div>
+<div class="doc-tabs var_output">var_output($path) — сохраняет в строку интерфейса данные из файла по пути $path.</div>
+<div class="doc-tabs var_end">var_end() - выводит строку или массив интерфейса и обнуляет его.</div>
+<div class="doc-tabs var_count">var_count() - выводит количество символов в строке, если массив, то количество элементов массива.</div>
+<div class="doc-tabs dump_obj">
+dump_obj($arr,$obj='O') – превращает массив в многоуровневые объекты.
+$arr- массив, $obj – флаг. По умолчанию работает как обертка метода mask_to_obj. Пример структуры массива:
+$arr = array(
+    '::number_foton#test'=&gt;
+        array('v'=&gt;
+            array('test123--'),
+            'm'=&gt;array(
+            '::input_foton'=&gt;array(
+                                'v'=&gt;array(
+                                    'number_foton_test'=&gt;'1'
+                                )
+                            )
+                )
+            )
+    );
+print_r($this-&gt;core-&gt;dump_obj($arr));
+результат:
+stdClass Object
+(
+    [number_foton_test] =&gt; stdClass Object
+        (
+            [input_foton] =&gt; 123
+        )
+
+)
+Разберем массив - ::number_foton#test — так как в начале ::, то будет выполнен поиск метода ядра, если бы не было :: была бы вызвана функция php библиотеки. Например мы могли бы написать str_replace, если бы мы указали, например Controller_Test::test – был бы подключен метод класса  Controller_Test, класс должен быть динамическим и объявленным. #текстбезпробелов – это комментарий к методу, если будут объявлены два одинаковых метода, то результаты перезапишутся, чтобы этого не произошло мы добавляем префикс.  Значением этого ключа, как и всех других в этом многомерном массиве является массив из двух ключей — v массив сигнатур метода, m – массив из новых методов, который состоит также из ключа — метода и значения массива v=&gt;array(),m=&gt;array(0 и т. д.
+Для использования результата предыдущего метода, как значения сигнатуры следующего в массиве v в ключе необходимо указать название метода заменив # на _, а также, если есть класс метода, то и его указываем в начале, вот так вот, например  Controller_Test_test, в значении укажем любое значение, обычно 1.
+Значение результата метода изменяются каскадно, поэтому их можно использовать несколько раз.
+Например такой массив:
+$arr = array(
+    '::input_foton#test'=&gt;
+        array('v'=&gt;
+            array('test123&lt;&gt;--'),
+            'm'=&gt;array(
+                 'strlen'=&gt;array(
+                                    'v'=&gt;array(
+                                        'input_foton_test'=&gt;'1'
+                                    )
+                                ),
+            '::number_foton'=&gt;array(
+                                'v'=&gt;array(
+                                    'input_foton_test'=&gt;'1'
+                                )
+                            )
+                )
+            )
+    );
+выдаст после обработки:
+(
+    [input_foton_test] =&gt; stdClass Object
+        (
+            [strlen] =&gt;9
+            [number_foton] =&gt; 123
+        )
+
+)
+Как мы видим strlen = 9, это значит, что взят результат метода «test123&lt;&gt;».
+</div>
+
+<div class="doc-tabs getXML">getXML($data) – преобразует массив в XML данные, и выводит их.
+$data – массив данных любой вложенности.
+getid($arr)  - выводит поля из таблицы по id записи
+$arr = array('table'=&gt;таблица,'id'=&gt;id записи для вывода,
+'fields'=&gt;поля для вывода, необязательный параметр,
+'error'=&gt; любое значение. Если ключ существует, и записей нет будет произведен редирект на 404 страницу,
+'format'=&gt; принимает значения:
+'O' -  (объект) выводит результат в виде объекта
+'J' – (json)  выводит json строку
+'S' – (serialize)  выводит сериализованную строку
+'E' – (echo)  выводит SQL строку запроса для тестирования
+'X' – (xml) выводит результат в xml формате
+Если ключ не задан выводит по умолчанию массив
+
+</div><div class="doc-tabs getlist">getlist($arr) — выводит список значений полей таблицы, является оберткой handlersql
+$arr – array('таблица',
+'where' =&gt;array('(маска)поле'=&gt;'значение','(маска)поле'=&gt;'значение'), //если logic=&gt;LOGIC значением будет строка типа: ”поле1='значение' or поле2!=12”
+(маска) — пустое → равно, ! → не равно,%-&gt;LIKE,^ →  начало строки,$ → конец строки, &lt; → меньше,&gt; → больше
+'fields'=&gt;array('field1','field2') или 'field1,field2' поля для вывода, если не указан group, если group указан, поля для вывода заменяется на поля group
+'group'=&gt;array('field1','field2') или 'field1,field2' – поля для группировки
+'logic', - LOGIC,AND,OR
+'sort', - array('поле'=&gt;ASC или DESC);
+'count', -  количество элементов
+'page' — страница
+'format' - принимает значения:
+'O' -  (object) выводит результат в виде объекта
+'J' – (json)  выводит json строку
+'S' – (serialize)  выводит сериализованную строку
+'E' – (echo)  выводит SQL строку запроса для тестирования
+'X' – (xml) выводит результат в xml формате
+Если ключ не задан выводит по умолчанию массив
+)
+
+
+</div><div class="doc-tabs handlersql">handlersql($table=null,$arr=null,$format=null) — основной метод вывода данных для интерфейсов и пользовательских методов, основан на ORM Foton
+$table – название таблицы
+$arr - array('where'=&gt;array(
+'field'=&gt;array('(маска)поле'=&gt;'значение'),
+ (маска) — пустое → равно, ! → не равно,%-&gt;LIKE,^ →  начало строки,$ → конец строки, &lt; → меньше,&gt; → больше
+'and'=&gt;'and или or')
+)
+,'count'=&gt;количество элементов,
+'page'=&gt;страница,
+'sort'=&gt;array('fields'=&gt;'asc') — сортировка, поле → ASC ,DESC,LOGIC, если LOGIC, то для ['where']['field'] значением будет строка типа: ”поле1='значение' or поле2!=12” );
+$format - принимает значения:
+'O' -  (объект) выводит результат в виде объекта
+'E' – (echo)  выводит SQL строку запроса для тестирования
+Если ключ не задан выводит по умолчанию массив
+
+
+</div><div class="doc-tabs change_id">change_id ($id=null) - $id – список id ролей через запятую, если роль текущего пользователя есть в списке выводит true, если нет false, служит для проверки доступа текущего пользователя к каким-либо действиям
+
+</div><div class="doc-tabs role_foton_auth">role_foton_auth() - проверяет авторизован ли пользователь в системе, если да, возвращает true, иначе false
+
+</div><div class="doc-tabs chmod_section_f">chmod_section_f($table=null) – проверяет доступ текущего пользователя к таблице, если есть возвращает true, иначе false
+$table – таблица, для которой производится проверка доступа
+
+</div><div class="doc-tabs interfaces_chmod_f">interfaces_chmod_f($id) – interfaces_chmod_f('1,2') — проверяет есть ли текущая роль в списке id переданных ролей, если еть true, иначе false
+
+</div><div class="doc-tabs m_method">m_method($path=null,$arg=null,$arr=null) подключает класс передает результат метода класса
+$path — путь к файлу класса или фасад namespaces/method
+$arr – необязательный аргумент может быть строкой или массивом, передается только как один аргумент для __construct класса при его инициализации.
+о фасадах и классах более подробно в разделе «Разработка внутренних модулей»
+если класса не существует пишет false
+$arg – массив аргументов метода для функции call_user_func_array
+
+</div><div class="doc-tabs m_class">m_class($path=null,$arr=null) — подключает класс, передает массив методов класса, ключ → название, значение → результат метода
+$path — путь к файлу класса или фасад namespaces
+$arr – необязательный аргумент может быть строкой или массивом, передается только как один аргумент для __construct класса при его инициализации.
+о фасадах и классах более подробно в разделе «Разработка внутренних модулей»
+если класса не существует пишет false
+
+</div><div class="doc-tabs m_name">m_name($path=null) — подключает класс, передает название класса, используется, если контроллер вашего класса имеет более одного аргумента.
+$path — путь к файлу класса или фасад namespaces
+о фасадах и классах более подробно в разделе «Разработка внутренних модулей»
+если класса не существует пишет false
+Пример использования:
+$name = $this-&gt;core-&gt;m_name('mytest');
+$obj = new $name($arg1,$arg2,$arg3 etc.);
+
+</div><div class="doc-tabs m_obj">m_obj($path=null,$arr=null) - подключает класс,создает и передает объект класса
+$path — путь к файлу класса или фасад namespaces
+$arr – необязательный аргумент может быть строкой или массивом, передается только как один аргумент для __construct класса при его инициализации.
+о фасадах и классах более подробно в разделе «Разработка внутренних модулей»
+если класса не существует пишет false
+
+</div><div class="doc-tabs tpl_front_css">tpl_front_css($arr=null) — выводит содержимое css файла типа данных
+$arr – массив содержащий названия типов данных, возможна передача вместе с разделителями и аргументами прямо из хука модели.
+
+</div><div class="doc-tabs tpl_front_js">tpl_front_js($arr=null) — выводит содержимое js файла типа данных
+$arr – массив содержащий названия типов данных, возможна передача вместе с разделителями и аргументами прямо из хука модели.
+
+</div><div class="doc-tabs type_kod">type_kod($f1=null,$f2=null) – выводит поле по типу данных из таблицы html
+$f1 – название типа данных
+$f2 – название поля для вывода, если не указано будет передан массив со всеми полями
+
+</div><div class="doc-tabs extracod">extracod($cod=null) – выводит значение дополнительного поля по  его коду
+
+</div><div class="doc-tabs imgcod">imgcod($cod=null) – выводит путь к картинке от корня сайта  по  коду в медиатеке
+
+</div><div class="doc-tabs is_format">is_format($format=null,$get=0) — проверяет формат в строке ЧПУ.
+$format - .xml,.json,.modul и т. д.
+$get – если указан не ноль, проверяется только точное совпадение
+Возвращает true или false
+</div><div class="doc-tabs arr_f">arr_f() Печать массива
+Результат: Печать массива &lt;pre&gt; print_r() &lt;/pre&gt;
+
+</div><div class="doc-tabs log_f">log_f($text=null,$format=null,$method=null) - log_f('текст',1,'number_foton')
+Выводит сообщение в консоль
+Сигнатура: $text – текст для вывода, может быть массивом, $format – если не null массив сериализуется перед выводом, $method – перед выводом переменная $text – обрабатывается методом, если он указан, методы должны принадлежать ядру core и иметь одну переменную сигнатуры
+Результат: вывод console.log
+
+</div><div class="doc-tabs log_file">log_file ($name='no',$text=null,$append='no')
+Создает файл в директории .logi 
+$name если не равна no файл создается с этим именем и суффиксом Ymd.!?
+Иначе Ymd.!?
+$text – текст для записи обязательный параметр
+$append – если не no, то данные дозаписываются в файл
+
+</div><div class="doc-tabs alert">alert($text=null,$method=null,$format=null)
+Выводит js сообщение alert
+$text – текст для вывода
+$method – если не null, данные обрабатываются этим методом, это только метод ядра, который имеет только один первый обязательный параметр
+$format — если не null данные перед выводом сериализуются
+
+</div><div class="doc-tabs st_start">st_start() - запускает запись времени выполнения скрипта
+
+</div><div class="doc-tabs st_end">st_end() - останавливает запись времени и выводит результат в секундах
+</div><div class="doc-tabs eq_f">eq_f() - выводит строку запроса (из ORM Foton)
+	
+</div><div class="doc-tabs select_db	">select_db	($table=null,$attr=null,$attr2=null,$echo=null)
+$table — таблица
+$attr — поле таблицы в условии WHERE
+$attr2 — значение поля таблицы в условии WHERE
+$echo — поля для вывода через ; или одно поле
+Выводит массив данных значений полей таблицы
+
+</div><div class="doc-tabs update_db">update_db ($table=null,$attr=null,$attr2=null,$where=null)
+$table — таблица
+$attr — поля для обновления через ;
+$attr2 — значения полей через ;
+$where — строка условия WHERE
+
+</div><div class="doc-tabs delete_db">delete_db($table=null,$attr=null,$attr2=null)
+$table — таблица
+$attr — поле таблицы в условии WHERE
+$attr2 — значение поля таблицы в условии WHERE
+Удаляет записи из таблицы удовлетворяющие условию
+
+</div><div class="doc-tabs field_tables">field_tables($table=null)
+$table — таблица
+Выводит массив полей таблицы
+
+</div><div class="doc-tabs field_table_foton">field_table_foton($table=null,$field=null)
+$table — таблица
+$field – поля для вывода
+Выводит массив значений поле таблицы
+ strukture_foton
+
+</div><div class="doc-tabs format_table_foton">format_table_foton($table=null) 
+$table — таблица
+Выводит массив форматов полей таблицы
+
+</div><div class="doc-tabs id_field_foton">id_field_foton ($table=null,$field=null,$id=null)
+$table — таблица
+$field – поля для вывода
+$id – id записи для вывода в условии WHERE
+Выводит массив значений полей таблицы 
+   
+</div><div class="doc-tabs insert_db">insert_db($table=null,$attr=null,$attr2=null)
+$table — таблица
+$attr — поля таблицы для записи через ;
+$attr2 — значения полей таблицы через ;
+Создает новую запись в таблице
+
+</div><div class="doc-tabs table_listdesc">table_listdesc()
+Выводит массив таблиц текущей базы данных, в desc содержится массив полей таблиц
+в id содержится массив названий таблиц
+
+</div><div class="doc-tabs site_dump">site_dump($dump=null,$arr_no_del=null)
+$dump – если не null то выполняется запись текущей базы данных в файл, иначе ошибка и сообщение log_f
+$arr_no_del – массив таблиц, которые не нужно записывать в файл
+Создается архив файловой системы и базы данных в директорию $GLOBALS['foton_setting']['key']
+
+</div><div class="doc-tabs sql_insert">sql_insert($file=null) — выполняет запись в базу данных из файла
+$file – путь к файлу дампа базы данных
+tables_sp_foton() - выдает массив списка таблиц текущей базы данных
+
+</div><div class="doc-tabs sql_dump_file">sql_dump_file($file=null,$no_table=null) — создает дамп базы данных и сохраняет в файл
+$file – абсолютный путь к файлу для сохраниения дампа
+$no_table – массив названий таблиц, которые не нужно записывать в дамп (необязательный параметр)
+
+</div><div class="doc-tabs select_db_seo">select_db_seo($table=null,$attr=null,$attr2=null,$echo=null)
+$table — таблица
+$attr — поле таблицы в условии WHERE
+$attr2 — значение поля таблицы в условии WHERE
+$echo — поля для вывода через ; или одно поле
+Выводит массив данных значений полей таблицы, аналогичен select_db, но имеет особенности для работы с таблицей seo
+
+</div><div class="doc-tabs select_otdo_seo">select_otdo_seo($table=null,$from=null,$to=null,$echo=null)
+$table — таблица
+$from - от какой записи выводить
+$to — количество записей для вывода
+$echo — поле сортировки desc
+Выводит массив записей таблицы
+
+</div><div class="doc-tabs tablessortw">tablessortw($valtables=null,$id="id",$sort='DESC',$ceil='0',$w1=null,$w2=null)
+Выводит данные из таблицы
+$valtables — название таблицы
+$id – поле сортировки
+$sort — тип сортировки
+$ceil — если 0, сортируется как текст, если 1 как цифры
+$w1 – поле проверки
+$w2 – проверяемое значение для поля
+
+</div><div class="doc-tabs update_core">update_core() - устанавливает соединение с ядром системы, получает версию ядра
+
+</div><div class="doc-tabs up_core_conn">up_core_conn() - передает массив для выполнения запроса по обновлению ядра
+
+</div><div class="doc-tabs up_core">up_core($yes=null) — обновляет ядро системы, если $yes!=null
+
+</div><div class="doc-tabs cache_foton">cache_foton($view=null) – преобразует шаблоны системы в php код,
+a_cache_foton($view=null) – преобразует шаблоны системы в php код для представлений админ. панели,
+$view – код шаблона для обработки
+Метод выдает обработанный код
+</div><div class="doc-tabs error404">error404() - выводит 404 ошибку с заголовком и выводом шаблона $GLOBALS["foton_setting"]["error404"]
+
+</div><div class="doc-tabs list_model_f">list_model_f($dir=null) – выводит массив с названиями моделей указанных в хуке names
+$dir – директория содержащая модели в директории model (site,admin etc...)
+
+</div><div class="doc-tabs s_mvc">s_mvc($path=null,$name=null,$dirw=null)
+$path – view | model | controller
+$name – название шаблона
+$dirw — директория шаблона внутри view | model | controller (site,admin etc...)
+Метод выводит содержимое элемента шаблона  view | model | controller
+
+</div><div class="doc-tabs mobile_foton">mobile_foton() - определяет мобильное устройство, если устройство определено как мобильное возвращает true, иначе false
+
+</div><div class="doc-tabs mail_foton">mail_foton($from=null,$to=null,$subject=null,$message=null,$file=null)
+Отправляет E-mail со вложением
+$from – Email от кого
+$to – Email кому
+$subject — тема письма
+$message – текст письма, возможно в html формате, кодировка utf-8
+$file – необязательный параметр, абсолютны йпуть к файлу на сервере
+
+</div><div class="doc-tabs meta">meta() - обрабатывает ЧПУ, и определяет мета данные страницы, результатом является массив мета данных с ключами названия мета данных: keywords,title,description
+
+</div><div class="doc-tabs list_files_glob">list_files_glob() - возвращает массив названий всех mvc шаблонов системы используя хук модели nameinclude 
+
+</div><div class="doc-tabs list_model_glob">list_model_glob ($model=null) 
+$model – название модели
+Возвращает массив таблиц данной модели доступных для редактирования текущим пользователем
+
+</div><div class="doc-tabs list_mvc">list_mvc($dirs=null,$dirview=null)
+$dirs — директория mvc (controller|model|view)
+$dirview – директория сайта или админ. Панели
+Выводит массив названий mvc шаблонов в формате
+$arr[название файла модели:директория сайта или админ панели] = название модели из хука nameinclude
+
+</div><div class="doc-tabs isset_file">isset_file ($file=null) — проверяет есть ли модель или контроллер в директории сайта или админ панели в gitf системе, если да, возвращает true, иначе false
+
+</div><div class="doc-tabs copy_dir">copy_dir($source=null, $dest=null, $over=1) — копирует файлы из одной директории в другую
+$source — абсолютный путь к директории откуда копируем
+$dest — абсолютный путь к директории куда копируем
+
+</div><div class="doc-tabs sizefile">sizefile($dir=null) — считает общий объем данных файлов лежащих по пути $dir от корня сайта в байтах, считает без вложенных папок
+
+</div><div class="doc-tabs require_class">require_class($mod=null,$dir=null) — служит для подключения модели и контроллера, работает только если и модель и контроллер у шаблона mvc созданы, возвращает класс модели.
+$mod – название модели, $dir – директория внутри директории контроллера и модели
+
+
+</div><div class="doc-tabs require_obj">require_obj($mod=null,$dir=null) — служит для подключения модели и контроллера, работает только если и модель и контроллер у шаблона mvc созданы, возвращает объект модели.
+$mod – название модели, $dir – директория внутри директории контроллера и модели
+
+</div><div class="doc-tabs delete_post">delete_post($arr=null,$field=null)
+удаляет данные из массива
+$arr — массив (ключ-&gt;значение)
+$field — массив, либо одно значение ключа для удаления
+возвращается обработанный массив, если одно из значений не указано выводится log_f
+
+
+</div><div class="doc-tabs arr_sort">arr_sort($arr=null,$sort=1)
+$arr – массив для сортировки
+$sort – если 1, массив сортируется по возрастанию значений, иначе по убыванию значений
+
+</div><div class="doc-tabs arr_shift">arr_shift($arr_func=null,$item=null) — сдвигает массив на количество элементов $item
+$arr_func – исходный массив
+$item – число на которое нужно сдвинуть массив вперед
+если $item='ARRAY' будет выполнен перебор всех вариантов сдвига массива
+Результат — массив, который сдвинут на n элементов, либо массив всех переборов сдвигов массива
+
+</div><div class="doc-tabs arr_sort_key">arr_sort_key($arr=null,$num=null,$sort=null)
+Сортирует массив по длине ключей
+$arr - массив, содержащий буквенные ключи
+$num - максимальное количество ключей одинаковой длины
+$sort - если не пусто, то массив сортируется по длине ключа от большего, иначе от меньшего к большему
+Результат — массив отсортированный по длине ключей
+
+</div><div class="doc-tabs ifile_create">ifile_create($file) – метод создает файл по вышеуказанному пути в формате $file.'.txt' и заполняет его начальной структурой, метод ничего не возвращает. 
+
+</div><div class="doc-tabs ifile_start">ifile_start($file) — присваивает значение аргумента статической переменной ifile, метод ничего не возвращает.
+$file – абсолютный путь к справочнику.
+ifile_update($arr) – обновляет запись
+$arr – массив содержащий поля структуры и значения, ID – содержит id элемента для его обновления, например:
+$arr = array('TYPE'=&gt;'html', 'VALUE'=&gt;'test value', 'NAME'=&gt;'code', 'ID'=&gt;2);
+В случае успеха возвращает true, в случае ошибок выводит лог ошибок log_f
+
+</div><div class="doc-tabs ifile_insert">ifile_insert($arr) — создает запись
+$arr – массив содержащий поля структуры и значения, ID – содержит id элемента содержит count('ID') так как инкремента в данной системе не предусмотрено, его нужно получить самостоятельно на стороне интерфейса, например:
+$arr = array('TYPE'=&gt;'html', 'VALUE'=&gt;'test value', 'NAME'=&gt;'code', 'ID'=&gt;3);
+В случае успеха возвращает id записи, которую создали, должен совпадать с вашим переданным id, в случае ошибок выводит лог ошибок log_f.
+
+</div><div class="doc-tabs ifile_delete">ifile_delete($id) – удаляет запись по ее id
+$id – элемент в структуре ['ID']
+В случае успеха возвращает true, в случае ошибок выводит лог ошибок log_f.
+
+</div><div class="doc-tabs ifile_drop">ifile_drop() - удаляет справочник,
+если не найдена статическая переменная $ifile выдает лог ошибки, если файл успешно удален возвращает true, при ошибки удаления возвращает false.
+
+</div><div class="doc-tabs ifile_arr">ifile_arr() - если не найдена статическая переменная $ifile возвращает false, если найдена возвращает массив справочника.
+
+</div><div class="doc-tabs ifile_list">ifile_list($default_name='Значение',$select = array('TYPE','NAME','VALUE')) – выводит обработанный методом ядра f_echo_type тип элемента.
+Если не найдена статическая переменная $ifile выдает лог ошибки.
+
+</div><div class="doc-tabs icode">icode($code,$file) – возвращает значение элемента файлового интерфейса по его коду.
+$code – название кода элемента
+$file – имя справочника(файла)
+Пример:
+$test = $this-&gt;core-&gt;icode('test','file');
+Переменная при хорошем исходе будет содержать значение элемента справочника.
+</div>
+</div>

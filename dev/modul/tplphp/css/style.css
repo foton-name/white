@@ -1,0 +1,334 @@
+.hiddes,
+.hiddes2 {
+    position: absolute;
+    z-index: 200;
+    display: none;
+    background: rgba(29, 66, 89, 0.99);
+    padding: 20px;
+    color: #fff;
+    left: 300px;
+}
+
+.content textarea,
+.content input,
+.content select {
+    width: calc(100% - 22px);
+    height: 44px;
+    padding-left: 18px;
+    position: relative;
+    margin: 0 auto;
+    vertical-align: middle;
+    overflow: hidden;
+    -webkit-transition: background 0.5s ease;
+    -moz-transition: background 0.5s ease;
+    transition: background 0.5s ease;
+    clear: both;
+    border: 1px solid #d0d0d0;
+    margin-top: 12px;
+    background: #31363b;
+    color: #fff;
+    display: block;
+}
+
+#u input,
+#u textarea,
+#u,
+#u2 input,
+#u2 textarea,
+#u2 {
+    animation: flyin 2.2s ease forwards;
+    opacity: 0;
+    transform: scale(2);
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    -o-perspective: 600px;
+    perspective: 600px;
+    -webkit-transform: rotateX(45deg);
+    -moz-transform: rotateX(45deg);
+    -o-transform: rotateX(45deg);
+    transform: rotateX(45deg);
+    filter: blur(4px);
+}
+
+.shablon textarea,
+.hiddes2 textarea {
+    font-size: 20px;
+    position: relative;
+    top: 20px;
+    color: #fff;
+    /* background: #373737 !important; */
+    padding: 5px;
+    width: 350px;
+    height: 200px;
+    background: linear-gradient(to bottom, #000000 0%, #022238 100%) !important;
+}
+
+.block {
+    width: 800px;
+    position: relative;
+    margin: 0 auto;
+    top: 55px;
+    text-align: center;
+}
+
+.new {
+    top: 25px;
+    background: #383a4c;
+    color: #fff;
+    width: 280px !important;
+}
+
+.shablon input[type="text"],
+.shablon select,
+.shablon input[type="submit"],
+.hiddes2 input[type="text"],
+.hiddes2 select,
+.hiddes2 input[type="submit"] {
+    border: 1px solid #9fc6d852;
+    padding: 3px;
+    width: 250px;
+    margin-top: 10px;
+    display: inline-block;
+    height: 50px;
+    margin-left: 10px;
+    position: relative;
+}
+
+.shablon textarea,
+.hiddes2 textarea {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.default,
+.default2 {
+    width: max-content;
+    display: block;
+    padding: 2px;
+    background: #fc721c;
+    height: 35px;
+    line-height: 35px;
+    padding: 0px 20px;
+    border-radius: 50px;
+    background-color: #FB6216;
+    background-attachment: fixed;
+    background-position: center;
+    background: linear-gradient(to bottom, #383a4c 0%, #61647f 100%);
+    color: #fff;
+    z-index: 2000;
+    position: absolute;
+    cursor: pointer;
+    top: -30px;
+}
+
+.content {
+    background: #fff !important;
+}
+
+.shablon,
+.hiddes2 {
+    -webkit-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    -khtml-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    -moz-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    -ms-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    -o-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    color: #fff;
+}
+
+.hiddes2 .copyf {
+    width: 120px;
+    height: 51px;
+    background: #383a4c !important;
+    clear: unset;
+    padding: 0px;
+    float: left;
+    position: relative;
+    top: 2px;
+    border: 0px;
+    color: #fff;
+}
+
+.hiddes2 .del input {
+    width: 20px;
+    height: 20px;
+}
+
+.plust,
+.minust {
+    width: 50px !important;
+    height: 50px !important;
+    background: #383a4c !important;
+    clear: unset;
+    padding: 0px;
+    position: relative;
+    top: 12px;
+    display: inline-block !important;
+    padding: 0px !important;
+    color: #fff !important;
+    border: 0px !important;
+    margin-left: 2px !important;
+}
+
+.hiddes,
+.hiddes2 {
+    position: absolute;
+    z-index: 200;
+    display: none;
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    color: #fff;
+    left: 300px;
+}
+
+.hiddes p,
+.hiddes2 p {
+    top: -20px;
+    position: relative;
+    cursor: pointer;
+    float: right;
+    right: 0px;
+}
+
+.shablon,
+.hiddes2 {
+    -webkit-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    -khtml-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    -moz-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    -ms-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    -o-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.20);
+    color: #2a3e4c;
+}
+
+.del {
+    float: right;
+    top: 30px;
+    position: relative;
+}
+
+.shablon form,
+.hiddes2 form {
+    width: 1050px;
+    position: relative;
+    margin: 0 auto;
+    background: #fffdfd00;
+    border-radius: 7px;
+    box-shadow: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 0px;
+    border-bottom: 0px;
+    margin-top: 80px;
+}
+
+.shablon input[type="text"],
+.shablon select,
+.shablon input[type="submit"],
+.hiddes2 input[type="text"],
+.hiddes2 select,
+.hiddes2 input[type="submit"] {
+    border: 1px solid #9fc6d852;
+    padding: 3px;
+    width: 250px;
+    margin-top: 10px;
+    display: inline-block;
+    height: 50px;
+    margin-left: 10px;
+    position: relative;
+}
+
+.shablon textarea,
+.hiddes2 textarea {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.shablon textarea,
+.hiddes2 textarea {
+    font-size: 20px;
+    position: relative;
+    top: 20px;
+    color: #fff;
+    /* background: #373737 !important; */
+    padding: 5px;
+    width: 350px;
+    height: 200px;
+    background: linear-gradient(to bottom, #000000 0%, #022238 100%) !important;
+}
+
+#u input,
+#u textarea,
+#u,
+#u2 input,
+#u2 textarea,
+#u2 {
+    animation: flyin 2.2s ease forwards;
+    opacity: 0;
+    transform: scale(2);
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    -o-perspective: 600px;
+    perspective: 600px;
+    -webkit-transform: rotateX(45deg);
+    -moz-transform: rotateX(45deg);
+    -o-transform: rotateX(45deg);
+    transform: rotateX(45deg);
+    filter: blur(4px);
+}
+
+@keyframes flyin {
+    to {
+        -webkit-filter: blur(0);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.class {
+    position: relative;
+    top: 20px;
+}
+
+.right {
+    float: right;
+    right: 20px;
+    top: 80px;
+    position: fixed;
+}
+
+.filetext {
+    margin-left: 10px;
+    width: 200px;
+    height: 50px;
+    border: 2px solid #444;
+    display: inline-table;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: cursive;
+    top: 10px;
+    position: relative;
+    cursor: pointer;
+    line-height: 3em;
+    /* background: #0e57737a; */
+    border: 1px solid #d2d2d21f;
+    background: rgb(56, 58, 76);
+    margin-top: 12px;
+    color: #fff;
+}
+
+.new {
+    top: 25px;
+    background: #383a4c;
+    color: #fff;
+    width: 280px !important;
+}
+
+.filetext:hover {
+    background: #4b9bff;
+    -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+    color: #fff;
+}

@@ -1,0 +1,10 @@
+.i_foto_up{
+    width: 50%;
+    position: relative;
+    left: 25%;
+    margin-top: 20px;
+}
+.fotos img {
+    max-width: 250px;
+    height: 70px;
+}

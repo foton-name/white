@@ -1,0 +1,1 @@
+<input type='hidden' name='section' value='<?= $this->request->p['id']; ?>'>'

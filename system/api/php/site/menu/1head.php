@@ -1,0 +1,1 @@
+<?php  $result25 = $this->db->query("SELECT * FROM  `menu` WHERE `sections`='0' ORDER BY `sorts` ASC  ");  foreach($result25 as $row) {?>

@@ -1,0 +1,428 @@
+#!/usr/bin/php -q
+<?php 
+error_reporting(0);
+ini_set('display_errors',-1);
+if(isset($_SERVER['REQUEST_URI'])){
+    echo 'not script';
+    exit();
+}
+$_SERVER['HTTP_HOST'] = basename(__DIR__);
+require_once __DIR__.'/core/config.php';
+require_once __DIR__.'/core/helper.php';
+require_once __DIR__.'/core/config_custom.php';
+require_once __DIR__.'/dev/custom_valid.php';
+require_once __DIR__.'/core/lib/preload.php';
+require_once __DIR__.'/core/core.php';
+$core = new \Foton\Core;
+if (version_compare(PHP_VERSION, '5.6.0') >= 0) {
+    require_once __DIR__.'/dev/event.php';
+    require_once __DIR__.'/dev/type.php';
+    require_once __DIR__.'/dev/custom.php';
+    require_once __DIR__.'/core/lib/run.php';
+}
+require_once __DIR__.'/core/model.php';
+class Console extends Model{
+    
+    public function up(){
+        $this->core->up_tpl();
+    }
+    public function opcache(){
+        if(function_exists('opcache_compile_file')){
+            $files = array('/core/lib/preload.php','/core/core.php','/core/lib/run.php','/core/model.php','/core/view.php');
+            foreach ($files as $file) {
+                opcache_compile_file(__DIR__.$file);
+            }
+            return 'opcache preload выполнен';
+        }
+        else{
+           return 'Установите opcache'; 
+        }
+    }
+    public function migrate($face=null,$dir=null){
+        $this->core->migrate($face,$dir);
+    }
+    public function transact($file=null){
+        if($file!=null){
+            return $this->core->transactions($file);
+        }
+        else{
+            return 'Укажите транзакцию';
+        }
+    }
+	public function project($file){
+		return $this->core->project_create($file);
+	}	
+    public function echo($mvc,$file,$dir){
+       return $this->core->s_mvc($mvc,$file,$dir);
+    }
+    public function list($mvc,$dir){
+        return $this->core->list_mvc($mvc,$dir);
+    }
+    public function back($model,$status){
+        return $this->core->mBack($model,$status);
+    }
+    public function create($dir,$name,$json=null){
+        if($json!=null){
+            return $this->core->create_mvc($dir,$name,true);
+        }
+        else{
+            return $this->core->create_mvc($dir,$name);
+        }
+    }
+    public function update($dir,$name){
+        return $this->core->up_mvc($dir,$name);
+    }
+    public function delete($dir,$name){
+        return $this->core->delete_mvc($dir,$name);
+    }
+    public function file_m($model,$status){
+        $pf=__DIR__.'/system/migrations/'.$GLOBALS['foton_setting']['sitedir'].'/'.$model.'_'.$status.'.php';
+        if(file_exists($pf)){
+            require_once $pf;
+            $file=$this->core->mf_json($model,$status);
+            if($file && isset($arr)){
+                $json = json_encode($arr,true);
+                file_put_contents($file,$json);
+                unlink($pf);
+                return $file.' обновлен';
+            }
+            else if(isset($arr)){
+                $json = json_encode($arr,true);
+                file_put_contents(__DIR__.'/system/migrations/'.$GLOBALS['foton_setting']['sitedir'].'/'.$model.'_'.$status.'_new.json',$json);
+                unlink($pf);
+                return $model.'_'.$status.'_new.json создан';
+            }
+            else{
+                return 'Не найден массив $arr';
+            }
+        }
+        else{
+            return 'Файл не найден';
+        }
+    }
+	public function mod($module=null,$arr=null){		
+		$obj = $this->core->m_obj($module);
+		if(method_exists($obj,'console')){
+			if($arr!=null){
+				return $obj->console(...array_values($arr));
+			}
+			else{
+				return $obj->console();
+			}
+		}
+		else{
+			return 'not found method console';
+		}		
+    }
+    public function m_create($model=null,$table=null,$field=null){
+        return $this->core->mCreate($model,$table,$field);
+    }
+    public function m_update($model=null,$table=null,$field=null){
+        return $this->core->mUpdate($model,$table,$field);
+    }
+    public function m_up_f($model=null,$table=null,$field=null){
+        return $this->core->mUpdateField($model,$table,$field);
+    }
+    public function m_up_f2($model=null,$table=null,$field=null){
+        return $this->core->mUpdateField2($model,$table,$field);
+    }
+    public function up_core(){
+        return $this->core->up_core(1);
+    }
+    public function diff($model){
+        return $this->core->mDiff($model);
+    }
+    public function alter($model=null,$table=null,$field=null){
+        return $this->core->mAlter($model,$table,$field);
+    }
+    public function mdel($model=null,$table=null,$field=null){
+        return $this->core->mDel($model,$table,$field);
+    }
+    public function mdrop($model=null,$table=null){
+        return $this->core->mDrop($model,$table);
+    }
+    public function deltr($model=null,$table=null,$field=null){
+        return $this->core->mDeltr($model,$table,$field);
+    }
+    public function addtr($model=null,$table=null,$field=null){
+        return $this->core->mAddtr($model,$table,$field);
+    }
+    public function print($model,$status){
+        return $this->core->mEcho($model,$status);
+    }
+	public function composer($module){
+        if(strpos($module,':')){
+            $arr = explode(':',$module);
+            $method = $arr[1];
+            $name = $arr[0];
+            print_r($this->core->m_obj('FotonSystem')->composer($name)->$method());
+        }
+		else{
+			print_r($this->core->m_obj('FotonSystem')->composer()->list());
+		}
+    }
+    public function widget(){
+        foreach(glob(__DIR__.'/dev/widget/'.$GLOBALS['foton_setting']['sitedir'].'/*') as $file){
+            $arr[]=basename($file);
+        }
+        return $arr;
+    }
+    public function module(){
+         foreach(glob(__DIR__.'/dev/modules/*') as $file){
+            $arr[]=basename($file);
+        }
+        return $arr;
+    }
+    public function type(){
+        return $this->core->mType();
+    }   
+    public function drop_site($dir){
+        $arr_dir = array('/app/ajax/'.$dir,'/app/controller/'.$dir,'/app/model/'.$dir,'/app/view/'.$dir,'/system/api/tpl/'.$dir,'/dev/modul/htmlred/shablon/'.$dir,'/dev/modul/htmlred/site/'.$dir);
+        $arr_f = array('/app/ajax/ajax_'.$dir.'.php','/app/ajax/ajax_'.$dir.'_m.php');
+        foreach($arr_f as $file){
+            unlink($file);
+        }
+        foreach($arr_dir as $i_dir){
+            $this->core->dir_delete_foton(__DIR__.$i_dir);
+        }
+    }
+    public function drop_admin($dir){
+        $arr_dir = array('/app/ajax/'.$dir,'/app/controller/'.$dir,'/app/model/'.$dir,'/app/view/'.$dir,'/system/api/tpl/'.$dir,'/dev/modul/htmlredadmin/shablon/'.$dir,'/dev/modul/htmlredadmin/site/'.$dir);
+        $arr_f = array('/app/ajax/ajax_'.$dir.'.php','/app/ajax/ajax_'.$dir.'_m.php');
+        foreach($arr_f as $file){
+            if(file_exists($file)){
+                unlink($file);
+            }
+        }
+        foreach($arr_dir as $i_dir){
+            if(file_exists($i_dir)){
+                $this->core->dir_delete_foton(__DIR__.$i_dir);
+            }
+        }
+    }
+}
+$c = new Console;
+    if(isset($argv[1]) && $argv[1]=='up'){
+        $c->up();
+        echo "yes update\n";
+    }
+    else if(isset($argv[1]) && $argv[1]=='up_core'){
+        $c->up_core();
+        echo "Ядро обновлено до версии: ".$GLOBALS['foton_setting']['coref']."\n";
+    }
+    else if(isset($argv[1]) && $argv[1]=='system'){
+        foreach($GLOBALS as $key=>$glob){
+            if(is_string($glob)){
+                echo $key.' = '.$glob."\n";
+            }
+        }
+    }
+	else if(isset($argv[1]) && $argv[1]=='mod' && isset($argv[2])){
+		$module = $argv[2];
+		unset($argv[0]);
+		unset($argv[1]);
+		unset($argv[2]);
+		if(count($argv)>0){
+			print_r($c->mod($module,$argv));
+		}
+		else{
+			print_r($c->mod($module));
+		}
+    }
+	else if(isset($argv[1]) && $argv[1]=='project' && isset($argv[2])){
+        print_r($c->project($argv[2]));
+    }
+    else if(isset($argv[1]) && $argv[1]=='widget'){
+        print_r($c->widget());
+    }
+    else if(isset($argv[1]) && $argv[1]=='opcache'){
+        echo $c->opcache()."\n";
+    }
+    else if(isset($argv[1]) && $argv[1]=='module'){
+        print_r($c->module());
+    }
+    else if(isset($argv[1]) && $argv[1]=='type'){
+        print_r($c->type());
+    }
+    else if(isset($argv[1]) && $argv[1]=='diff' && isset($argv[2])){
+        print_r($c->diff($argv[2]));
+    }
+	else if(isset($argv[1]) && $argv[1]=='composer' && isset($argv[2])){
+        print_r($c->composer($argv[2]));
+    }
+    else if(isset($argv[1]) && $argv[1]=='transaction' && isset($argv[2])){
+        print_r($c->transact($argv[2]));
+    }
+    
+    else if(isset($argv[1]) && $argv[1]=='list' && isset($argv[2]) && isset($argv[3])){
+    print_r($c->list($argv[2],$argv[3]));
+    echo "\n";
+    }
+    else if(isset($argv[1]) && $argv[1]=='back' && isset($argv[2]) && isset($argv[3])){
+        echo $c->back($argv[2],$argv[3]);
+        echo "yes back\n";
+    }
+    else if(isset($argv[1]) && $argv[1]=='print' && isset($argv[2]) && isset($argv[3])){
+        print_r($c->print($argv[2],$argv[3]));
+        echo "\n";
+    }
+    else if(isset($argv[1]) && $argv[1]=='create' && isset($argv[2]) && isset($argv[3])){
+        if(isset($argv[4]) && $argv[4]=='-j'){
+            echo $c->create($argv[2],$argv[3],'json');
+        }
+        else{
+            echo $c->create($argv[2],$argv[3]);
+        }   
+    echo "yes create\n";
+    }
+    else if(isset($argv[1]) && $argv[1]=='delete' && isset($argv[2]) && isset($argv[3])){
+    echo $c->delete($argv[2],$argv[3]);
+    echo "yes delete\n";
+    }
+    else if(isset($argv[1]) && $argv[1]=='update' && isset($argv[2]) && isset($argv[3])){
+    echo $c->update($argv[2],$argv[3]);
+    echo "yes update\n";
+    }
+    else if(isset($argv[1]) && $argv[1]=='echo' && isset($argv[2]) && isset($argv[3]) && isset($argv[4])){
+        echo $c->echo($argv[2],$argv[3],$argv[4])."\n";
+    }
+    else if(isset($argv[1]) && stristr($argv[1], 's:') !== FALSE && isset($argv[2])){
+        $method = explode(':',$argv[1])[1];
+        if(isset($method) && $method=='drop'){
+            $c->drop_site($argv[2]);
+            echo 'Сайт '.$argv[2]." удален\n";
+        }
+    }
+    else if(isset($argv[1]) && stristr($argv[1], 'i:') !== FALSE && isset($argv[2])){
+        $method = explode(':',$argv[1])[1];
+        if(isset($method) && $method=='drop'){
+            $c->drop_admin($argv[2]);
+            echo 'Панель '.$argv[2]." удалена\n";
+        }
+    }
+    else if(isset($argv[1]) && stristr($argv[1], 'm:') !== FALSE){
+        $method = explode(':',$argv[1])[1];
+        if(isset($method) && $method!=''){
+            if($method=='create' && isset($argv[2]) && isset($argv[3]) && isset($argv[4])){
+                echo $c->m_create($argv[2],$argv[3],$argv[4])."\n";
+                echo "yes migrate create\n";
+            }
+            else if($method=='file' && isset($argv[2]) && isset($argv[3])){
+                echo $c->file_m($argv[2],$argv[3])."\n";
+            }
+            else if($method=='add' && isset($argv[2]) && isset($argv[3]) && isset($argv[4])){
+                if(isset($argv[5]) && $argv[5]=='-t'){
+                    echo $c->addtr($argv[2],$argv[3],$argv[4])."\n";
+                }
+                else{
+                echo $c->m_up_f($argv[2],$argv[3],$argv[4])."\n";
+                }
+                echo "yes migrate add\n";
+            }
+            else if($method=='up' && isset($argv[2]) && isset($argv[3]) && isset($argv[4])){
+                echo $c->m_up_f2($argv[2],$argv[3],$argv[4])."\n";
+                echo "yes migrate up\n";
+            }
+            else if($method=='alter' && isset($argv[2]) && isset($argv[3]) && isset($argv[4])){
+                echo $c->alter($argv[2],$argv[3],$argv[4])."\n";
+                echo "yes migrate alter\n";
+            } 
+            else if($method=='del' && isset($argv[2]) && isset($argv[3]) && isset($argv[4])){
+                if(isset($argv[5]) && $argv[5]=='-t'){
+                    echo $c->deltr($argv[2],$argv[3],$argv[4])."\n";
+                }
+                else{
+                    echo $c->mdel($argv[2],$argv[3],$argv[4])."\n";
+                }
+                echo "yes migrate delete\n";
+            }
+            else if($method=='drop' && isset($argv[2]) && isset($argv[3])){
+                echo $c->mdrop($argv[2],$argv[3])."\n";
+                echo "yes migrate drop\n";
+            }
+          
+            else{
+                echo "Не переданы все аргументы, смотрите help";
+            }
+        }
+        else{
+                echo "Не переданы все аргументы, смотрите help";
+        }
+    }
+    else if(isset($argv[1]) && $argv[1]=='migrate'){
+        if(empty($argv[2])){
+            $argv[2]=null;
+        }
+        if(empty($argv[3])){
+            $argv[3]=null;
+        }
+    $c->migrate($argv[2],$argv[3]);
+    echo "yes migrate\n";
+    }
+    else if(isset($argv[1]) && $argv[1]=='help'){
+        echo "\033[01;31m up \033[0m - обновление шаблонов";
+        echo "\n без параметров";
+        echo "\n\033[01;31m opcahe \033[0m - выполняет opcache preload файлов ядра";
+        echo "\n\033[01;31m echo \033[0m - вывод содержимого файла";
+        echo "\n\033[01;31m :model html site \033[0m - выведет model с названием model_html.php из директории site";
+        echo "\n\033[01;31m list \033[0m - список файлов";				
+		echo "\n\033[01;31m mod sdek param1 param2 \033[0m - Вызовет метод console, если будет найден в модуле sdek и передаст в него параметры param1 и param2\n";
+		echo "\033[01;31m project structure \033[0m - если будет найден файл /system/structure.php из массива \$arr будет создан проект \n";		
+        echo "\n\033[01;31m :model site \033[0m - выведет список моделей из директории site\n";
+		echo "\033[01;31m composer sdek:create (update/drop) \033[0m - загрузит, либо обновит, либо удалит модуль со всеми зависимостями, при удалении зависимые модули не удаляются\n";
+        echo "\033[01;31m migrate \033[0m - выполнить миграцию баз данных\n";
+        echo "\t :interface directory - необязательные параметры \n";
+        echo "\t (interface: название метода модели после названия модели без _, например interface_sp)\n";
+        echo "\t (directory: название директории где искать модели, например site)\n";
+        echo "\033[01;31m create site Test (-j)  \033[0m - создаст mvc шаблон Test в папке site \n\t -j - необязательная опция,\n\tпри ее использовании создается модель работающая с миграциями\n";
+        echo "\033[01;31m update site Test  \033[0m - обновит mvc шаблон Test в папке site\n";
+        echo "\033[01;31m delete site Test \033[0m - удалит mvc шаблон Test в папке site\n";
+        echo "\033[01;31m widget \033[0m - выведет список виджетов\n";
+        echo "\033[01;31m module \033[0m - выведет список внутренних модулей\n";
+        echo "\033[01;31m type \033[0m - выведет массив типов данных для работы с базой данных\n";
+        echo "\033[01;31m diff Test \033[0m - выведет изменения модели Test\n";
+        echo "\033[01;31m print Test create \033[0m - выведет текущее состояние модели Test со статусом create\n";
+        echo "\033[01;31m m:del model table field1,field2 \033[0m - без флага -t удаляем поля  field1,field2 таблицы table в модели model \n";
+        echo "\033[01;31m m:del model table custom_field -t \033[0m - с флагом -t удаляем строку custom_field таблицы table в модели model \n";
+        echo "\033[01;31m m:add model table field%f1,f2 -t \033[0m- добавит строку field с полями f1,f2 в таблицу table модели model\n";
+        echo "\033[01;31m m:add model table field%text%text \033[0m - добавит поле field (название поля%формат вывода%формат хранения) в таблицу table модели model\n";
+        echo "\033[01;31m m:up model table field%text%text \033[0m - обновит поле field (название поля%формат вывода%формат хранения) в таблицу table модели model\n";
+        echo "\033[01;31m m:drop model table \033[0m- удалит таблицу table\n";
+        echo "\033[01;31m m:create model table id,f1,f2%input,textarea,html%int,text,text%id \033[0m - название полей через ,%форматы вывода через ,%формат хранения через ,%поле ключа\n";
+        echo "\033[01;31m m:alter Model table  field1,field2:text \033[0m - заменит поле field1 на field2 с типом text в таблице table модели model \n";
+       
+    }
+    else{
+        echo "\033[01;31m up \033[0m - обновление шаблонов";
+        echo "\n без параметров";
+        echo "\n\033[01;31m opcahe \033[0m - выполняет opcache preload файлов ядра";
+        echo "\n\033[01;31m echo \033[0m - вывод содержимого файла";
+        echo "\n\033[01;31m :model html site \033[0m - выведет model с названием model_html.php из директории site";
+        echo "\n\033[01;31m list \033[0m - список файлов";
+		echo "\n\033[01;31m mod sdek param1 param2 \033[0m - Вызовет метод console, если будет найден в модуле sdek и передаст в него параметры param1 и param2\n";
+		echo "\033[01;31m project structure \033[0m - если будет найден файл /system/structure.php из массива \$arr будет создан проект \n";
+        echo "\n\033[01;31m :model site \033[0m - выведет список моделей из директории site\n";
+		echo "\033[01;31m composer sdek:create (update/drop) \033[0m - загрузит, либо обновит, либо удалит модуль со всеми зависимостями, при удалении зависимые модули не удаляются\n";
+        echo "\033[01;31m migrate \033[0m - выполнить миграцию баз данных\n";
+        echo "\t :interface directory - необязательные параметры \n";
+        echo "\t (interface: название метода модели после названия модели без _, например interface_sp)\n";
+        echo "\t (directory: название директории где искать модели, например site)\n";
+        echo "\033[01;31m create site Test (-j)  \033[0m - создаст mvc шаблон Test в папке site \n\t -j - необязательная опция,\n\tпри ее использовании создается модель работающая с миграциями\n";
+        echo "\033[01;31m update site Test  \033[0m - обновит mvc шаблон Test в папке site\n";
+        echo "\033[01;31m delete site Test \033[0m - удалит mvc шаблон Test в папке site\n";
+        echo "\033[01;31m widget \033[0m - выведет список виджетов\n";
+        echo "\033[01;31m module \033[0m - выведет список внутренних модулей\n";
+        echo "\033[01;31m type \033[0m - выведет массив типов данных для работы с базой данных\n";
+        echo "\033[01;31m diff Test \033[0m - выведет изменения модели Test\n";
+        echo "\033[01;31m print Test create \033[0m - выведет текущее состояние модели Test со статусом create\n";
+        echo "\033[01;31m m:del model table field1,field2 \033[0m - без флага -t удаляем поля  field1,field2 таблицы table в модели model \n";
+        echo "\033[01;31m m:del model table custom_field -t \033[0m - с флагом -t удаляем строку custom_field таблицы table в модели model \n";
+        echo "\033[01;31m m:add model table field%f1,f2 -t \033[0m- добавит строку field с полями f1,f2 в таблицу table модели model\n";
+        echo "\033[01;31m m:add model table field%text%text \033[0m - добавит поле field (название поля%формат вывода%формат хранения) в таблицу table модели model\n";
+        echo "\033[01;31m m:up model table field%text%text \033[0m - обновит поле field (название поля%формат вывода%формат хранения) в таблицу table модели model\n";
+        echo "\033[01;31m m:drop model table \033[0m- удалит таблицу table\n";
+        echo "\033[01;31m m:create model table id,f1,f2%input,textarea,html%int,text,text%id \033[0m - название полей через ,%форматы вывода через ,%формат хранения через ,%поле ключа\n";
+        echo "\033[01;31m m:alter Model table  field1,field2:text \033[0m - заменит поле field1 на field2 с типом text в таблице table модели model \n";
+       
+    }
+ ?>

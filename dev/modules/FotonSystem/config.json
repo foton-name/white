@@ -1,0 +1,24 @@
+{
+    "module":
+    {
+        "sdek":
+            ["dpd","pochta"]
+    },
+    "php":
+    {
+        "sdek":
+            ["php5-mysql","php5-curl"]
+    },
+    "ignore":
+    {
+        "dpd":true
+    },
+    "host":
+    {
+        "sdek":
+        {
+            "url":"https://foton.name/module.ajaxsite","key":"key_license"
+        }
+    },
+    "key":"your_key"
+}

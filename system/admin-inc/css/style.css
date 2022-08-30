@@ -1,0 +1,265 @@
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+ .center-div {
+     width: 1224px;
+     height: max-content;
+     position: absolute;
+     left: 0;
+     right: 0;
+     top: 0;
+     bottom: 0;
+     margin: auto;
+ }
+ 
+ body {
+     transition: background 2s ease;
+ }
+ 
+ span.logis {
+     color: red;
+     font-size: 12px;
+ }
+ 
+ span.foton {
+     width: 100%;
+     position: relative;
+     float: left;
+     color: #fff;
+     font-weight: normal;
+     font-size: 36px;
+     letter-spacing: 2px;
+     margin-bottom: 12px;
+ }
+ 
+ input:focus {
+     outline: none;
+ }
+ 
+ .window-auth input:not(.but2):focus {
+     border-color: #338FFF;
+     background: rgba(51, 143, 255, .2);
+     padding-left: 20px;
+ }
+ 
+ .relative {
+     position: relative;
+     width: 100%;
+     height: 100%;
+ }
+ 
+ body {
+     position: fixed;
+     width: 100%;
+     height: 100%;
+     padding: 0px;
+     margin: 0px;
+ }
+ 
+ .overload {
+     background: #0000007a;
+     width: 100%;
+     height: 100%;
+     padding: 0px;
+     position: fixed;
+     margin: auto;
+ }
+ 
+ img {
+     width: 150px;
+     display: inline-table;
+     vertical-align: middle;
+ }
+ 
+ .text {
+     padding-right: 20px;
+     padding-top: 12px;
+     font-size: 20px !important;
+     font-size: 1.2em;
+     position: fixed;
+     top: 0px;
+     left: 0px;
+     padding: 12px;
+     z-index: 500;
+     color: #7b7b7b;
+     background: #ffffff;
+     height: 100%;
+     z-index: 0;
+     writing-mode: tb-rl;
+     padding-top: 50px;
+ }
+ 
+ .in-logo {
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     margin: auto;
+     width: max-content;
+     height: max-content;
+ }
+ 
+ .logo {
+     display: inline-table;
+ }
+ 
+ .window-auth {
+     display: inline-table;
+     position: relative;
+     width: 520px;
+     height: 460px;
+     background-color: #fff;
+     border-radius: 10px;
+     padding: 50px;
+     box-sizing: border-box;
+     margin-right: 20px;
+ }
+ 
+ .window-auth input[type="text"],
+ .window-auth input[type="password"] {
+     background-color: #fff;
+     box-sizing: border-box;
+     color: #000;
+     float: left;
+     font-weight: 400;
+     height: 39px;
+     line-height: 39px;
+     position: relative;
+     width: 100%;
+     background-position: 0 12px;
+     padding-left: 0;
+     margin-left: 0;
+     padding-right: 0;
+     margin-right: 0;
+     margin-top: 5px;
+     border: medium none;
+     border-radius: 0;
+     text-decoration: none;
+     font-family: 'Roboto';
+     font-size: 14px;
+     word-break: keep-all;
+     border-bottom: 2px solid #f1f3f4;
+ }
+ 
+ p.input-label {
+     position: relative;
+     float: left;
+     width: 100%;
+     color: #000;
+     font-weight: 500;
+ }
+ 
+ button.but2 {
+     position: relative;
+     float: left;
+     background-color: hsl(200deg 96% 44%);
+     color: #fff;
+     padding-left: 30px;
+     padding-right: 30px;
+     cursor: pointer;
+     line-height: 35px;
+     border-radius: 29px;
+     transition: 0.3s;
+     margin-bottom: 60px;
+     margin-top: 15px;
+     height: 36px;
+     font-weight: 400;
+     border: 0px;
+ }
+ 
+ p.h1 {
+     box-sizing: border-box;
+     color: #000;
+     margin-top: 0;
+     position: relative;
+     width: auto;
+     font-weight: 600;
+     font-size: 28px;
+ }
+ 
+ p.h3 {
+     box-sizing: border-box;
+     color: hsl(200deg 96% 44%);
+     float: left;
+     font-weight: 300;
+     margin-top: -10px;
+     padding-left: 0;
+     padding-right: 0;
+     position: relative;
+     text-align: left;
+     width: 100%;
+     line-height: 20px;
+     font-size: 14px;
+     margin-bottom: 5px;
+ }
+ 
+ * {
+     font-family: 'Roboto';
+ }
+ 
+ .logo p {
+     color: #fff;
+     width: 350px;
+     display: inline-table;
+     vertical-align: middle;
+     margin-left: 20px;
+ }
+ 
+ .logo {
+     width: 640px;
+     height: 100%;
+ }
+ 
+ @media only screen and (max-width:1280px) and (min-width:800px) {
+     .logo {
+         display: none;
+     }
+     .center-div {
+         width: 100%;
+     }
+     .window-auth {
+         display: table;
+         position: relative;
+         margin: 0 auto;
+     }
+ }
+ 
+ @media only screen and (max-width:1050px) and (min-width:200px) {
+     .logo {
+         display: none;
+     }
+     .window-auth input[type="text"],
+     .window-auth input[type="password"] {
+        font-size: 2rem;
+        height: 5rem;
+    }
+     button.but2 {
+        font-size: 1.8rem;
+        height: 5rem;
+        width: 70%;
+        margin-top: 5rem;
+        position: relative !important;
+        display: block !important;
+        margin-left: 15%;
+        padding: 0px !important;
+    }
+    .center-div {
+         width: 100%;
+         height: 100%;
+         position: relative;
+     }
+    .window-auth {
+         font-size: 2rem;
+         display: block;
+         position: relative;
+         margin: 0 auto;
+         width: 100%;
+         height: 100%;
+         overflow:auto;
+         background-color: #0808082b;
+    }
+     .text{
+         display:none;
+     }
+    .window-auth input[type="text"], .window-auth input[type="password"],p.h1,p.h3,p.input-label {
+        background: transparent;
+        color:white;
+    }
+ }

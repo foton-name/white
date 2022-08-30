@@ -1,0 +1,37 @@
+canvas#countries {
+    zoom: 0.5;
+    background-image: -moz-linear-gradient(90deg,#3f5efb 0%,#fc466b 100%);
+    /* background-image: -webkit-linear-gradient(90deg,#3f5efb 0%,#fc466b 100%); */
+    background-image: -ms-linear-gradient(90deg,#3f5efb 0%,#fc466b 100%);
+    border-radius: 12px;
+    margin-left: 50px;
+    background-color: rgba(0,0,0,.2);
+}
+body{
+color:#fff !important;}
+canvas#countries1str {
+    zoom: 0.5;
+    background-image: -moz-linear-gradient(90deg,#11998e 0%,#38ef7d 100%);
+    /* background-image: -webkit-linear-gradient(90deg,#11998e 0%,#38ef7d 100%); */
+    background-image: -ms-linear-gradient(90deg,#11998e 0%,#38ef7d 100%);
+    border-radius: 12px;
+    background-color: rgba(0,0,0,.2);
+}
+
+canvas#income {
+    border-radius: 12px;
+    zoom: 0.5;
+    background-image: -moz-linear-gradient(90deg,#ee0979 0%,#ff6a00 100%);
+    /* background-image: -webkit-linear-gradient(90deg,#ee0979 0%,#ff6a00 100%); */
+    background-image: -ms-linear-gradient(90deg,#ee0979 0%,#ff6a00 100%);
+    margin-left: 50px;
+    background-color: rgba(0,0,0,.2);
+}
+.tbl td {
+    border-bottom: 2px solid #00000047;
+    padding-bottom: 12px;
+    color: #ffffff !important;
+}
+form.information {
+    background: #00000020 !important;
+}

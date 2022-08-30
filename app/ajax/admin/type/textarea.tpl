@@ -1,0 +1,1 @@
+<span class='default_span'>[[lang]]</span><textarea name='[[name]]'>[[value]]</textarea>

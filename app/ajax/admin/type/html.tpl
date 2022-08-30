@@ -1,0 +1,1 @@
+return $this->tpl_html('html')->htmlredactor('[[value]]','[[name]]');

@@ -1,0 +1,107 @@
+input:active,select:active {
+    outline: none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    -webkit-touch-callout: none; /* iOS Safari */
+    /* -webkit-user-select: none;  Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+
+}
+p.timest2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 120px;
+    height: 120px;
+    background: #191f28;
+    border-radius: 200px;
+    color: #fff;
+    text-align: center;
+    line-height: 120px;
+    border: 5px solid;
+    -webkit-box-shadow: -5px 5px 12px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -5px 5px 12px 0px rgba(0,0,0,0.75);
+box-shadow: -5px 5px 12px 0px rgba(0,0,0,0.75);
+z-index:5000;
+}
+body {
+    margin: 0px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+input:focus,select:focus {
+    outline: 0px !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+	@font-face{font-family:'awesome';src:url('fontawesome-webfont.ttf')}
+-webkit-scrollbar{height:10px}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track-piece:vertical{background-color:#ffffff52}
+::-webkit-scrollbar-track-piece:horizontal{background-color:#ffffff52}
+::-webkit-scrollbar-thumb:vertical{background-color:#c6d4e6;border:1px #c6d4e6 solid;border-radius:3px;-webkit-border-radius:3px}
+::-webkit-scrollbar-thumb:vertical:hover{background-color::#ffffff52}
+::-webkit-scrollbar-thumb:vertical:active{background-color::#ffffff52}
+::-webkit-scrollbar-button:vertical{background-color:#ffffff52;background-repat:no-repeat;width:10px;height:10px}
+::-webkit-scrollbar-button:vertical:hover{background-color:#fff;background-repat:no-repeat;width:10px;height:10px}
+::-webkit-scrollbar-button:vertical:active{background-color:#eee;background-repat:no-repeat;width:10px;height:10px}
+::-webkit-resizer{background-color:#ffffff38;background-repeat:no-repeat;width:5px;height:5px}
+::-webkit-resizer:hover{background-color:#ffffff52;background-repeat:no-repeat;width:5px;height:5px}
+::-webkit-resizer:active{background-color:#ffffff52;background-repeat:no-repeat;width:5px;height:5px}
+-moz-scrollbar{height:10px}
+::-moz-scrollbar{width:10px}
+::-moz-scrollbar-track-piece:vertical{background-color:#3c3c3c}
+::-moz-scrollbar-track-piece:horizontal{background-color:#3c3c3c}
+::-moz-scrollbar-thumb:vertical{background-color:#787878;border:1px #8f8f8f solid;border-radius:3px;-moz-border-radius:3px}
+::-moz-scrollbar-thumb:vertical:hover{background-color:#969696}
+::-moz-scrollbar-thumb:vertical:active{background-color:#5b5b5b}
+::-moz-scrollbar-button:vertical{background-color:#5e5e5e;background-repat:no-repeat;width:10px;height:10px}
+::-moz-scrollbar-button:vertical:hover{background-color:#747474;background-repat:no-repeat;width:10px;height:10px}
+::-moz-scrollbar-button:vertical:active{background-color:#6b6b6b;background-repat:no-repeat;width:10px;height:10px}
+::-moz-resizer{background-color:#5e5e5e;background-repeat:no-repeat;width:5px;height:5px}
+::-moz-resizer:hover{background-color:#747474;background-repeat:no-repeat;width:5px;height:5px}
+::-moz-resizer:active{background-color:#6b6b6b;background-repeat:no-repeat;width:5px;height:5px}
+-o-scrollbar{height:10px}
+::-o-scrollbar{width:10px}
+::-o-scrollbar-track-piece:vertical{background-color:#3c3c3c}
+::-o-scrollbar-track-piece:horizontal{background-color:#3c3c3c}
+::-o-scrollbar-thumb:vertical{background-color:#787878;border:1px #8f8f8f solid;border-radius:3px;-o-border-radius:3px}
+::-o-scrollbar-thumb:vertical:hover{background-color:#969696}
+::-o-scrollbar-thumb:vertical:active{background-color:#5b5b5b}
+::-o-scrollbar-button:vertical{background-color:#5e5e5e;background-repat:no-repeat;width:10px;height:10px}
+::-o-scrollbar-button:vertical:hover{background-color:#747474;background-repat:no-repeat;width:10px;height:10px}
+::-o-scrollbar-button:vertical:active{background-color:#6b6b6b;background-repat:no-repeat;width:10px;height:10px}
+::-o-resizer{background-color:#5e5e5e;background-repeat:no-repeat;width:5px;height:5px}
+::-o-resizer:hover{background-color:#747474;background-repeat:no-repeat;width:5px;height:5px}
+::-o-resizer:active{background-color:#6b6b6b;background-repeat:no-repeat;width:5px;height:5px}
+
+.form-red-inc form input[type="text"],.form-red-inc form input[type="tel"] ,.form-red-inc form input[type="mail"] ,.form-red-inc form input[type="date"] ,.form-red-inc form input[type="number"] ,.form-red-inc form select,
+.section_item input[type="text"],.section_item  input[type="tel"] ,.section_item input[type="mail"] ,.section_item input[type="date"] ,.section_item  input[type="number"] ,.section_item  select,.form-red-inc form textarea,.section_item textarea
+{
+        border-width: 1.2px;
+    border-color: #3c424a;
+    color: #fff;
+    border-style: solid;
+    border-radius: 5px;
+    background-color: #262e38;
+    font-size: 16px;
+    width: calc(100% - 20px);
+    margin: 10px 0px;
+    display: inline-block;
+    height: 28px;
+    padding-left: 12px;
+}
+.form-red-inc form textarea,.section_item textarea{
+   height:120px; 
+}
+select.htmlinnerbut {
+    width: 20% !important;
+}
